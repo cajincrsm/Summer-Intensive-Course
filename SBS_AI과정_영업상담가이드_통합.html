@@ -1,0 +1,2801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SBS아카데미 강남점 · 2026 AI 과정 영업 상담 가이드">
+<title>SBS 강남 · AI 과정 영업 상담 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF8F3;
+  --paper: #FFFFFF;
+  --ink: #0B1F3A;
+  --ink-soft: #2C3E50;
+  --muted: #6E7A89;
+  --line: #E5E1D8;
+  --green: #1A9D5E;
+  --green-soft: #E8F5EE;
+  --danger: #C0392B;
+
+  /* per-course accents */
+  --c-design: #D63384;
+  --c-video: #E67E22;
+  --c-prompt1: #2980B9;
+  --c-prompt2: #8E44AD;
+  --c-compare: #6C757D;
+
+  /* current tab accent (set via JS) */
+  --accent: var(--c-design);
+  --accent-soft: rgba(214, 51, 132, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "ss01", "ss03";
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ====== Header ====== */
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(11, 31, 58, 0.02);
+}
+
+.brand-strip {
+  padding: 14px 24px 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.brand-mark {
+  font-family: "Spectral", serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 3px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+}
+
+.brand-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+}
+
+.brand-meta {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+}
+
+.tab-bar::-webkit-scrollbar { height: 4px; }
+.tab-bar::-webkit-scrollbar-thumb { background: var(--line); }
+
+.tab-btn {
+  flex: 0 0 auto;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.tab-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 16px;
+  right: 16px;
+  height: 3px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.tab-btn:hover { color: var(--ink); }
+
+.tab-btn.active { color: var(--ink); }
+.tab-btn.active::after { background: var(--accent); }
+
+.tab-btn .tab-emoji {
+  margin-right: 6px;
+}
+
+/* mobile menu toggle */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(11, 31, 58, 0.3);
+  z-index: 200;
+  display: none;
+}
+
+/* ====== Layout ====== */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+aside.sidebar {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  height: calc(100vh - 110px);
+  overflow-y: auto;
+  padding: 32px 16px 32px 24px;
+  border-right: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.sidebar-title {
+  font-family: "Spectral", serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sidebar ul { list-style: none; }
+.sidebar li { margin-bottom: 2px; }
+
+.sidebar a {
+  display: block;
+  padding: 7px 12px;
+  border-radius: 4px;
+  color: var(--ink-soft);
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+}
+
+.sidebar a:hover {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.sidebar a.active {
+  background: var(--accent-soft);
+  color: var(--ink);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+.sidebar-empty {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 12px;
+  font-style: italic;
+}
+
+main {
+  padding: 40px 56px 80px;
+  min-width: 0;
+}
+
+/* ====== Tab content ====== */
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== Cover ====== */
+.cover {
+  padding: 8px 0 32px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.cover-eyebrow {
+  font-family: "Spectral", serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.cover-title {
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.cover-subtitle {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.cover-en {
+  font-family: "Spectral", serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+/* ====== Callout ====== */
+.callout {
+  background: var(--green-soft);
+  border-left: 4px solid var(--green);
+  padding: 18px 22px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.callout.callout-ink {
+  background: rgba(11, 31, 58, 0.04);
+  border-left-color: var(--ink);
+}
+
+.callout.callout-accent {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+
+.callout.callout-danger {
+  background: rgba(192, 57, 43, 0.05);
+  border-left-color: var(--danger);
+}
+
+.callout-label {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.callout p {
+  margin: 4px 0;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+/* ====== Section / Part ====== */
+.part {
+  margin: 56px 0 24px;
+  scroll-margin-top: 130px;
+}
+
+.part-eyebrow {
+  font-family: "Spectral", serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+h1.part-title {
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 24px;
+}
+
+h2.sub-title {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 28px 0 12px;
+  scroll-margin-top: 130px;
+}
+
+h3.minor-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  margin: 20px 0 8px;
+}
+
+p { margin: 8px 0; font-size: 15px; color: var(--ink-soft); }
+
+p.body-lg { font-size: 15.5px; }
+
+strong { font-weight: 700; color: var(--ink); }
+
+ul.bullets, ol.numbered {
+  margin: 8px 0 12px 24px;
+}
+
+ul.bullets li, ol.numbered li {
+  margin: 6px 0;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+ul.bullets li strong, ol.numbered li strong { color: var(--ink); }
+
+/* ====== Overview Table ====== */
+table.overview, table.compare, table.day-compare, table.result-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+table.overview th, table.overview td,
+table.compare th, table.compare td,
+table.day-compare th, table.day-compare td,
+table.result-list th, table.result-list td {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  vertical-align: middle;
+  text-align: left;
+}
+
+table.overview th {
+  background: #F5F2EA;
+  font-weight: 700;
+  color: var(--ink);
+  width: 25%;
+}
+
+table.compare thead th {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+
+table.compare thead th.col-old { background: var(--muted); }
+table.compare thead th.col-new { background: var(--accent); }
+
+table.compare tbody th {
+  background: #F5F2EA;
+  font-weight: 700;
+  text-align: left;
+  width: 22%;
+}
+
+table.compare td.new-cell {
+  background: var(--accent-soft);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+table.day-compare thead th { background: var(--ink); color: #fff; text-align: center; }
+table.day-compare thead th.col-old { background: var(--muted); }
+table.day-compare thead th.col-new { background: var(--accent); }
+table.day-compare td.day-num { width: 60px; text-align: center; background: #F5F2EA; font-weight: 700; }
+table.day-compare td.new-cell { background: var(--accent-soft); font-weight: 600; }
+
+table.result-list td.day-num { width: 80px; text-align: center; background: #F5F2EA; font-weight: 700; }
+
+/* ====== Sales Point Card ====== */
+.sp-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  padding: 20px 24px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.sp-card .sp-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.sp-card .sp-title .sp-emoji {
+  margin-right: 6px;
+}
+
+.sp-card p { font-size: 14.5px; }
+
+/* ====== Target Card ====== */
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.target-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 18px 20px;
+  border-radius: 6px;
+}
+
+.target-card h4 {
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.target-card ul {
+  list-style: none;
+  margin: 0;
+}
+
+.target-card ul li {
+  font-size: 14px;
+  color: var(--ink-soft);
+  padding: 4px 0 4px 16px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.target-card ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ====== FAQ ====== */
+.faq-item {
+  margin: 18px 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+}
+
+.faq-q {
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.faq-a {
+  padding-left: 16px;
+}
+
+.faq-a p {
+  font-size: 14.5px;
+  margin: 6px 0;
+  padding-left: 18px;
+  position: relative;
+  color: var(--ink-soft);
+}
+
+.faq-a p::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ====== Taboo / Closing tables ====== */
+table.taboo {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+table.taboo th, table.taboo td {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  vertical-align: top;
+}
+
+table.taboo thead th.col-bad { background: var(--danger); color: #fff; text-align: center; }
+table.taboo thead th.col-good { background: var(--accent); color: #fff; text-align: center; }
+table.taboo td.bad-cell { background: rgba(192, 57, 43, 0.05); }
+table.taboo td.good-cell { background: var(--accent-soft); font-weight: 600; }
+
+/* ====== Checklist ====== */
+ul.checklist {
+  list-style: none;
+  margin: 12px 0;
+}
+ul.checklist li {
+  font-size: 14.5px;
+  padding: 4px 0;
+  color: var(--ink-soft);
+}
+
+/* ====== Compare Page ====== */
+.compare-hero {
+  padding: 8px 0 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+.compare-hero .cover-title { color: var(--c-compare); }
+.compare-hero .cover-subtitle { color: var(--ink-soft); }
+
+table.master-compare {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 32px;
+  font-size: 13.5px;
+  background: var(--paper);
+}
+
+table.master-compare th, table.master-compare td {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  vertical-align: middle;
+  text-align: left;
+}
+
+table.master-compare thead th {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+table.master-compare thead th.col-design { background: var(--c-design); }
+table.master-compare thead th.col-video { background: var(--c-video); }
+table.master-compare thead th.col-prompt1 { background: var(--c-prompt1); }
+table.master-compare thead th.col-prompt2 { background: var(--c-prompt2); }
+
+table.master-compare tbody th {
+  background: #F5F2EA;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+  width: 110px;
+}
+
+table.master-compare td {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* track cards for compare page */
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.track-card {
+  padding: 20px 22px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-top: 4px solid var(--c-compare);
+}
+
+.track-card.c-design { border-top-color: var(--c-design); }
+.track-card.c-video { border-top-color: var(--c-video); }
+.track-card.c-prompt1 { border-top-color: var(--c-prompt1); }
+.track-card.c-prompt2 { border-top-color: var(--c-prompt2); }
+
+.track-card .track-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.track-card .track-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background: var(--c-compare);
+  color: #fff;
+}
+.track-card.c-design .track-tag { background: var(--c-design); }
+.track-card.c-video .track-tag { background: var(--c-video); }
+.track-card.c-prompt1 .track-tag { background: var(--c-prompt1); }
+.track-card.c-prompt2 .track-tag { background: var(--c-prompt2); }
+
+.track-card .track-price {
+  font-family: "Spectral", serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 6px 0 10px;
+}
+
+.track-card .track-desc {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.track-card ul.track-features {
+  list-style: none;
+  margin-top: 10px;
+}
+.track-card ul.track-features li {
+  font-size: 13px;
+  padding: 3px 0 3px 14px;
+  position: relative;
+  color: var(--ink-soft);
+}
+.track-card ul.track-features li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* scenario rows on compare page */
+.scenario-list {
+  margin: 16px 0;
+}
+
+.scenario {
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.scenario .scenario-q {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.scenario .scenario-rec {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.scenario .scenario-rec .rec-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--c-compare);
+  margin-left: 4px;
+}
+.scenario .scenario-rec .rec-tag.t-design { background: var(--c-design); }
+.scenario .scenario-rec .rec-tag.t-video { background: var(--c-video); }
+.scenario .scenario-rec .rec-tag.t-prompt1 { background: var(--c-prompt1); }
+.scenario .scenario-rec .rec-tag.t-prompt2 { background: var(--c-prompt2); }
+
+/* ====== End mark ====== */
+.end-mark {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: "Spectral", serif;
+  font-style: italic;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  aside.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--paper);
+    border-right: 1px solid var(--line);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.08);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 150;
+    padding-top: 80px;
+  }
+  aside.sidebar.open { transform: translateX(0); }
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 140;
+  }
+  .sidebar-backdrop.open { display: block; }
+  main { padding: 28px 20px 100px; }
+  .menu-toggle { display: flex !important; align-items: center; justify-content: center; }
+  .brand-strip { padding: 10px 16px 6px; }
+  .tab-bar { padding: 0 8px; }
+  .tab-btn { padding: 12px 14px; font-size: 13px; }
+  .scenario { grid-template-columns: 1fr; }
+  .scenario .scenario-rec { text-align: left; }
+  table.compare, table.day-compare, table.master-compare { font-size: 12.5px; }
+  table.compare th, table.compare td,
+  table.day-compare th, table.day-compare td,
+  table.master-compare th, table.master-compare td { padding: 8px 8px; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  main { padding: 20px 14px 100px; }
+  .cover-title { font-size: 28px; }
+}
+
+/* ====== Print ====== */
+@media print {
+  header.site-header, aside.sidebar, .menu-toggle, .sidebar-backdrop { display: none !important; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 0; }
+  .tab-content { display: block !important; page-break-before: always; }
+  .tab-content:first-of-type { page-break-before: auto; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand-strip">
+    <span class="brand-mark">SBS</span>
+    <span class="brand-title">강남점 · 2026 AI 과정 영업 상담 가이드</span>
+    <span class="brand-meta">v1.0 · 영업팀 내부 자료</span>
+  </div>
+  <nav class="tab-bar" role="tablist">
+    <button class="tab-btn active" data-tab="compare" data-accent="compare" role="tab" aria-selected="true">
+      <span class="tab-emoji">📊</span>4과정 한눈 비교
+    </button>
+    <button class="tab-btn" data-tab="design" data-accent="design" role="tab">
+      <span class="tab-emoji">🎨</span>디자인 스타터
+    </button>
+    <button class="tab-btn" data-tab="video" data-accent="video" role="tab">
+      <span class="tab-emoji">🎬</span>마케팅 영상
+    </button>
+    <button class="tab-btn" data-tab="prompt1" data-accent="prompt1" role="tab">
+      <span class="tab-emoji">🤖</span>프롬프트 1단계
+    </button>
+    <button class="tab-btn" data-tab="prompt2" data-accent="prompt2" role="tab">
+      <span class="tab-emoji">✨</span>프롬프트 2단계
+    </button>
+  </nav>
+</header>
+
+<button class="menu-toggle" aria-label="목차 열기">☰</button>
+<div class="sidebar-backdrop"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">목차 — Index</div>
+    <ul id="toc-list"></ul>
+  </aside>
+
+  <main>
+
+<section id="tab-compare" class="tab-content active">
+  <div class="cover compare-hero">
+    <div class="cover-eyebrow">Master Comparison</div>
+    <h1 class="cover-title">4개 AI 과정 한눈 비교</h1>
+    <p class="cover-subtitle">학생 진로·관심사 → 과정 매칭 가이드</p>
+    <p class="cover-en">Course-at-a-glance for fast student matching</p>
+  </div>
+
+  <h2 class="sub-title" id="cmp-cards">과정 카드 요약</h2>
+  <div class="track-grid">
+    <div class="track-card c-design">
+      <span class="track-tag">디자인 스타터</span>
+      <div class="track-name">AI 디자인 스타터 클래스</div>
+      <div class="track-price">방학특강</div>
+      <p class="track-desc">10일 만에 내 브랜드 1개 완성 — 로고·패키지·연출컷·포스터·디지털 배너</p>
+      <ul class="track-features">
+        <li>2시간 × 10일 (총 20H)</li>
+        <li>입문자 가능 · 50세 미만</li>
+        <li>AI 5종 + 어도비 핵심</li>
+        <li>결과물: 브랜드 풀세트</li>
+      </ul>
+    </div>
+    <div class="track-card c-video">
+      <span class="track-tag">마케팅 영상</span>
+      <div class="track-name">AI 마케팅 영상 제작 과정</div>
+      <div class="track-price">방학특강</div>
+      <p class="track-desc">광고 영상 1편 완성 — 마케팅 이론 + AI 6종 + CapCut</p>
+      <ul class="track-features">
+        <li>2시간 × 10일 (총 20H)</li>
+        <li>13명 한정 · 100% 대면</li>
+        <li>전공 무관 · 마케팅 진로 적합</li>
+        <li>결과물: 광고 영상 + 발표 자료</li>
+      </ul>
+    </div>
+    <div class="track-card c-prompt1">
+      <span class="track-tag">프롬프트 1단계</span>
+      <div class="track-name">AI 프롬프트 엔지니어링 1단계</div>
+      <div class="track-price">40만원<span style="font-size:12px; color: var(--muted); font-weight:500;"> (구 60만)</span></div>
+      <p class="track-desc">업무 자동화 + AI-POT 자격증 — KPC 공인 자격증 응시 준비 완성</p>
+      <ul class="track-features">
+        <li>8일 과정 · 실습 중심</li>
+        <li>NotebookLM · Codex · GPTs</li>
+        <li>자격증: AI-POT (KPC 주관)</li>
+        <li>결과물: PPT · 자동화 · 챗봇 + 자격증</li>
+      </ul>
+    </div>
+    <div class="track-card c-prompt2">
+      <span class="track-tag">프롬프트 2단계</span>
+      <div class="track-name">AI 프롬프트 엔지니어링 2단계</div>
+      <div class="track-price">40만원<span style="font-size:12px; color: var(--muted); font-weight:500;"> (구 60만)</span></div>
+      <p class="track-desc">콘텐츠 제작 풀스택 — 캐릭터부터 영상·음악까지</p>
+      <ul class="track-features">
+        <li>8일 과정 · 콘텐츠 중심</li>
+        <li>Midjourney · Nano Banana · Flow · Suno</li>
+        <li>1단계와 노선 분화 · 듀얼 수강 추천</li>
+        <li>결과물: 7종 (캐릭터·만화·포스터·영상·음악…)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sub-title" id="cmp-table">정밀 비교표</h2>
+  <table class="master-compare">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="col-design">디자인 스타터</th>
+        <th class="col-video">마케팅 영상</th>
+        <th class="col-prompt1">프롬프트 1단계</th>
+        <th class="col-prompt2">프롬프트 2단계</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th>구분</th><td>방학특강</td><td>방학특강</td><td>정규 (리뉴얼)</td><td>정규 (리뉴얼)</td></tr>
+      <tr><th>핵심 트랙</th><td>브랜드 디자인</td><td>광고 영상·마케팅</td><td>업무·자격증</td><td>콘텐츠·비주얼</td></tr>
+      <tr><th>수업 시수</th><td>2H × 10일</td><td>2H × 10일</td><td>8일</td><td>8일</td></tr>
+      <tr><th>정원·운영</th><td>일반</td><td>13명 · 100% 대면</td><td>일반</td><td>일반</td></tr>
+      <tr><th>주력 도구</th><td>ChatGPT · Claude · Gemini · Firefly · Mixboard</td><td>ChatGPT · Gemini · Midjourney · Canva · Gamma · CapCut</td><td>ChatGPT · NotebookLM · Gamma · Codex · Perplexity</td><td>Midjourney · Nano Banana · Gemini · Flow · Suno</td></tr>
+      <tr><th>결과물 성격</th><td>정적 비주얼 (로고·패키지·포스터)</td><td>동적 콘텐츠 (광고 영상 1편)</td><td>업무 자동화 + 자격증</td><td>콘텐츠 풀스택 (캐릭터~음악)</td></tr>
+      <tr><th>자격증</th><td>—</td><td>—</td><td>AI-POT (KPC 공인)</td><td>—</td></tr>
+      <tr><th>핵심 타겟</th><td>1인 창업자 · SNS 운영자 · 디자인 입문자</td><td>마케팅 진로 학생 · 콘텐츠 운영자</td><td>직장인 · 자격증 수요자</td><td>크리에이터 · 1인 창업자 · 디자인 직군</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-title" id="cmp-match">학생 멘트 → 과정 매칭 시나리오</h2>
+  <p>학생의 첫 발화/관심사를 듣고 즉시 매칭할 수 있도록 정리했습니다.</p>
+  <div class="scenario-list">
+    <div class="scenario">
+      <div class="scenario-q">"브랜드 만들어보고 싶어요 / 로고·패키지 디자인 관심 있어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-design">디자인 스타터</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"인스타·유튜브 광고 영상 만들고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-video">마케팅 영상</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"마케팅 직군 취업 준비 중이에요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-video">마케팅 영상</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"AI 자격증 따고 싶어요 / 이력서에 한 줄 추가하고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-prompt1">프롬프트 1단계</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"회사 업무 자동화 / 보고서·이메일 자동화 배우고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-prompt1">프롬프트 1단계</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"캐릭터·인스타툰·웹툰 만들고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-prompt2">프롬프트 2단계</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"미드저니·AI 영상·음악 다 배워보고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-prompt2">프롬프트 2단계</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"1인 창업해요 — 홍보 영상·디자인 직접 만들고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-design">디자인</span> + <span class="rec-tag t-video">영상</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-q">"AI 업무도 자동화하고 콘텐츠도 만들고 싶어요"</div>
+      <div class="scenario-rec">→ <span class="rec-tag t-prompt1">1단계</span> + <span class="rec-tag t-prompt2">2단계</span> (듀얼)</div>
+    </div>
+  </div>
+
+  <h2 class="sub-title" id="cmp-packages">패키지 권유 가이드</h2>
+  <div class="callout callout-ink">
+    <div class="callout-label">🎓 마케팅·기획·홍보 진로</div>
+    <p>마케팅 영상 + 디자인 스타터 → "콘텐츠 풀세트" 완성</p>
+  </div>
+  <div class="callout callout-ink">
+    <div class="callout-label">🏪 1인 창업자 · 소상공인</div>
+    <p>디자인 스타터 + 마케팅 영상 → "브랜드 + 광고" 자가 생산 가능</p>
+  </div>
+  <div class="callout callout-ink">
+    <div class="callout-label">💼 직장인 · 취준생</div>
+    <p>프롬프트 1단계 (자격증) + 2단계 (콘텐츠) → "업무 + 부캐" 듀얼 무기</p>
+  </div>
+  <div class="callout callout-ink">
+    <div class="callout-label">🎨 크리에이터 · 디자인·콘텐츠 직군 지망</div>
+    <p>프롬프트 2단계 + 디자인 스타터 + 마케팅 영상 → 풀스택 포트폴리오</p>
+  </div>
+
+  <div class="end-mark">— End of Master Comparison —</div>
+</section>
+
+<section id="tab-design" class="tab-content">
+
+  <div class="cover">
+    <div class="cover-eyebrow">2026 방학특강 영업 상담 가이드</div>
+    <h1 class="cover-title">AI 디자인 스타터 클래스</h1>
+    <p class="cover-subtitle">Ai Design Starter Class — Sales Playbook</p>
+    <p class="cover-en">10-day brand-building intensive · AI-first design</p>
+  </div>
+
+  <div class="callout callout-ink">
+    <div class="callout-label">⚡ 한 줄 포지셔닝</div>
+    <p>"포토샵을 6개월 배우는 수업이 아니라, <strong>10일 만에 내 브랜드 한 개를 완성하는 수업.</strong>"</p>
+    <p>툴 중심이 아닌 결과물 중심. AI를 '도구가 아닌 협업자'로 다루는 법을 배운다.</p>
+  </div>
+
+  <h2 class="sub-title" id="d-overview">📌 과정 한눈에 보기</h2>
+  <table class="overview">
+    <tbody>
+      <tr><th>과정명</th><td>AI 디자인 스타터 클래스 (Ai Design Starter Class)</td></tr>
+      <tr><th>수업 시수</th><td>2시간 × 10일 = 총 20시간 (단기 집중형)</td></tr>
+      <tr><th>수업 형태</th><td>기획 → 생성 → 수정 → 확장 → 완성의 풀 사이클 실습</td></tr>
+      <tr><th>난이도</th><td>★★☆☆☆ (포토/일러 기초반보다 살짝 높음, 단 입문자 가능)</td></tr>
+      <tr><th>수강 대상</th><td>디자인/AI 입문자 누구나 (포토샵·일러스트 미경험자 OK) / 50세 미만</td></tr>
+      <tr><th>사용 도구</th><td>Photoshop, Illustrator + ChatGPT, Claude, Gemini, Firefly, Mixboard, PageGPT</td></tr>
+      <tr><th>최종 결과물</th><td>브랜드 로고 · 패키지 · 연출컷 · 포스터 · 디지털 배너 · 포트폴리오 페이지</td></tr>
+      <tr><th>추가 제공</th><td>프롬프트 작성 TIP 노션 자료 (수료 후에도 활용 가능)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 1</div>
+    <h1 class="part-title">왜 지금 이 과정인가 — 시장 상황 분석</h1>
+
+    <h2 class="sub-title" id="d-1-1">1-1. AI 디자인 시장의 현재 (2026)</h2>
+    <ul class="bullets">
+      <li>ChatGPT-4o, Gemini, Firefly 등 <strong>AI 이미지 생성 도구가 '실무 사용 수준'</strong>까지 진화 — 광고/마케팅 현장에서 실제 결과물로 사용 중</li>
+      <li>1인 창업·스마트스토어·인스타 마케팅 시장 폭발 → 브랜드 외주비용 부담 호소</li>
+      <li>디자인 외주 1건당 비용: 로고 30~100만 / 패키지 시안 50~150만 / 광고배너 30~80만 (시장 평균)</li>
+      <li>결과 = <strong style="color: var(--accent);">"내가 직접 만드는 사람"이 압도적 경쟁력</strong>을 가지는 시대로 전환</li>
+    </ul>
+
+    <h2 class="sub-title" id="d-1-2">1-2. 고객 니즈의 변화</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th class="col-old">예전 (~2023)</th>
+          <th class="col-new">지금 (2025~2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>포토샵 6개월 마스터하고 싶다</td><td class="new-cell">지금 당장 결과물 1개를 갖고 싶다</td></tr>
+        <tr><td>기능 하나하나 다 배워야 함</td><td class="new-cell">필요한 기능만 빠르게 익히고 응용</td></tr>
+        <tr><td>자격증·취업 중심</td><td class="new-cell">포트폴리오·1인 창업·부업 중심</td></tr>
+        <tr><td>긴 호흡의 정규 과정 선호</td><td class="new-cell">방학·휴가 활용한 단기 집중형 선호</td></tr>
+        <tr><td>"디자이너가 되고 싶다"</td><td class="new-cell">"내가 직접 브랜드를 운영하고 싶다"</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="d-1-3">1-3. 본 과정이 시장에 적합한 이유</h2>
+    <div class="callout callout-accent">
+      <div class="callout-label">✅ Market Fit Check</div>
+      <p>1. AI 도구는 무료/저가 진입 가능 → 학생 진입장벽 매우 낮음</p>
+      <p>2. 단기 집중형 학습 트렌드와 정확히 일치 (2시간 × 10일 = 20시간)</p>
+      <p>3. 포트폴리오 결과물 = 즉시 SNS·이력서·창업 자료로 활용 가능</p>
+      <p>4. "AI 활용 능력"은 모든 직군에서 요구되는 핵심 메타 스킬</p>
+      <p>5. 정규 포토샵/일러스트 과정으로 자연스러운 업셀 경로 확보</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 2</div>
+    <h1 class="part-title">차별화 포인트 — 툴 중심 vs 목적 중심</h1>
+
+    <h2 class="sub-title" id="d-2-1">2-1. 기존 디자인 수업과의 결정적 차이</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>비교 항목</th>
+          <th class="col-old">기존 포토/일러 수업</th>
+          <th class="col-new">AI 디자인 스타터 클래스</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>학습 방식</th><td>기능 하나하나 마스터 → 마지막에 작품 만들기</td><td class="new-cell">결과 목표 설정 → 필요한 도구만 골라 쓰기</td></tr>
+        <tr><th>수업 시간</th><td>60~120시간 (3~6개월)</td><td class="new-cell">20시간 (10일)</td></tr>
+        <tr><th>결과물 시점</th><td>후반부에 1~2개 작품</td><td class="new-cell">매 회차마다 결과물 누적</td></tr>
+        <tr><th>동기 부여</th><td>느림 (기능 익히는 단계 길음)</td><td class="new-cell">빠름 (즉시 보이는 결과 = 재미)</td></tr>
+        <tr><th>수료 후 자산</th><td>도구 사용 능력</td><td class="new-cell">브랜드 결과물 + 프롬프트 작성법 + 도구 활용</td></tr>
+        <tr><th>타겟 고객</th><td>디자이너 지망생, 자격증 준비생</td><td class="new-cell">1인 창업자, 부업러, 비전공자, 학생</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-accent">
+      <div class="callout-label">💡 영업 시 강조 멘트</div>
+      <p>"기존 수업이 '디자이너가 되는 길'이라면, 이 수업은 '디자인을 활용하는 사람이 되는 길'이에요.</p>
+      <p>두 가지가 다른 게 아니라, 시작하는 방향이 다른 거예요.</p>
+      <p>스타터 클래스로 재미와 결과를 먼저 보고, 그 다음에 깊게 파고 싶으면 정규 과정으로 자연스럽게 이어집니다."</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 3</div>
+    <h1 class="part-title">핵심 세일즈 포인트 5가지</h1>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP1. "10일이면 내 브랜드 1개가 완성됩니다"</div>
+      <p>OT 브랜드 기획부터 포트폴리오 페이지 완성까지 <strong>풀 사이클 1회 경험</strong>. 일반 디자인 학원에서는 6개월 후에야 만나는 <strong style="color: var(--accent);">'결과물 사이클'을 10일 안에 완주</strong>합니다. 학생은 수료 시점에 <strong>로고 / 패키지 / 연출컷 / 포스터 / 디지털 배너 / 포트폴리오 페이지</strong> 까지 6종의 결과물을 손에 얻습니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP2. "AI 5종을 도구별 강점으로 정확히 가르칩니다"</div>
+      <p>대부분의 "AI 디자인 수업"이 챗GPT 하나만 다루는 반면, 본 과정은 도구별 강점을 명확히 나누어 가르칩니다:</p>
+      <table class="overview" style="margin-top: 12px;">
+        <tbody>
+          <tr><th>ChatGPT</th><td>기획 · 네이밍 · 카피라이팅 · 레이아웃 초기 브랜딩</td></tr>
+          <tr><th>Claude</th><td>긴 프롬프트 작성 · 컨셉 문서 · 브랜딩 스토리</td></tr>
+          <tr><th>Gemini</th><td>사실적 묘사 · 빛/반사/재질 표현 · 공간감</td></tr>
+          <tr><th>Firefly</th><td>상업적 저작권 안전 · 어도비 생태계 연동</td></tr>
+          <tr><th>Mixboard</th><td>이미지 스타일 합성 · 무드보드 → 결과물 연결</td></tr>
+        </tbody>
+      </table>
+      <p>→ 한 가지 AI에 의존하지 않는 <strong style="color: var(--accent);">실무형 AI 워크플로우</strong>를 익히는 것이 본 과정의 핵심 가치입니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP3. "포토샵·일러스트 미경험자도 가능합니다"</div>
+      <ul class="bullets">
+        <li><strong>디자인 입문자 / 비전공자 모두 OK</strong></li>
+        <li>어도비 설치 어려운 분은 대면 참여 가능 — 진입장벽 제로</li>
+        <li>무료/데모 버전으로 진행 가능 (단, 정밀 작업은 제한)</li>
+        <li>포토샵·일러스트는 "필요한 핵심 기능"만 집중적으로 다뤄 진입 부담 최소화</li>
+      </ul>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP4. "포트폴리오로 즉시 활용 가능합니다"</div>
+      <p>수업 케이스 'Peonia' 핸드크림 브랜드는 모든 결과물이 수업 안에서 나온 <strong>실제 상업적 사용 가능 퀄리티</strong>. 학생은 자기만의 브랜드를 가지고 <strong style="color: var(--accent);">취업·창업·SNS 운영·스마트스토어</strong> 어디에든 즉시 활용할 수 있습니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP5. "AI 시대 핵심 메타 스킬 — 프롬프트 작성 공식"</div>
+      <p>AI는 누구나 쓸 수 있지만, <strong>결과물의 차이는 프롬프트에서 갈립니다</strong>. 본 과정은 단순 도구 사용법이 아닌 <strong style="color: var(--accent);">프롬프트 작성 공식, 키워드 설계, 도구별 사고법</strong>을 가르칩니다. 수료 후에도 활용 가능한 '사고법' 자산이 됩니다. 수강생에게는 <strong>노션 프롬프트 가이드 자료 제공</strong>.</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 4</div>
+    <h1 class="part-title">타겟 고객별 어필 메시지</h1>
+
+    <div class="target-grid">
+      <div class="target-card">
+        <h4>👨‍🎓 대학생 / 취준생</h4>
+        <ul>
+          <li>"포트폴리오 1개 = 자기소개서 한 줄, 면접 답변 5개"</li>
+          <li>디자인 비전공자도 도전 가능, 학과 무관</li>
+          <li>방학 안에 끝나는 단기 집중 → 학기 영향 X</li>
+          <li>AI 활용 능력은 이력서에 쓸 수 있는 키워드</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>💼 직장인 / 부업 준비자</h4>
+        <ul>
+          <li>"퇴근 후 6개월 → 휴가 10일로 압축"</li>
+          <li>본업과 병행 부담 적음 (방학 집중)</li>
+          <li>부캐 · 인스타 운영 · 스마트스토어에 즉시 활용</li>
+          <li>외주 의뢰비 0원으로 본인 브랜드 제작</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🏪 1인 창업자 / 사장님</h4>
+        <ul>
+          <li>"디자인 외주비 최소 100만원 → 본인이 직접"</li>
+          <li>로고 · 패키지 · 광고배너까지 풀 패키지</li>
+          <li>1회 수강료로 회수 가능한 ROI</li>
+          <li>트렌드 바뀔 때마다 직접 빠르게 수정 가능</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🔄 30~40대 커리어 전환 희망자</h4>
+        <ul>
+          <li>AI 시대 새로운 직군 진입 시도</li>
+          <li>디자인 외주 프리랜서 가능성</li>
+          <li>단기간에 '내가 뭘 할 수 있는지' 확인 가능</li>
+          <li>50세 미만 누구나 (IT 적응력 좋으면 상담 가능)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 5</div>
+    <h1 class="part-title">상담 현장 FAQ — 자주 받는 질문 & 응대법</h1>
+
+    <div class="faq-item">
+      <div class="faq-q">Q1. "AI가 다 해주는데 굳이 디자인을 배울 필요가 있나요?"</div>
+      <div class="faq-a">
+        <p>맞습니다. AI가 많은 부분을 대신해줍니다. 그래서 더 중요한 게 바로 "AI를 잘 부리는 사람"입니다.</p>
+        <p>같은 ChatGPT를 써도 어떤 사람은 평범한 결과물을, 어떤 사람은 상업용 결과물을 만듭니다. 그 차이가 바로 프롬프트 작성법, 도구별 강점 활용, 그리고 브랜드 기획력입니다.</p>
+        <p>본 과정은 그 세 가지를 정확히 가르칩니다. AI 시대일수록 이 능력이 차별화 포인트가 됩니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q2. "포토샵·일러스트를 제대로 안 배워도 괜찮나요?"</div>
+      <div class="faq-a">
+        <p>이 과정은 결과물 만들기에 집중하기 때문에 포토샵·일러스트는 필수 핵심 기능만 다룹니다.</p>
+        <p>수업을 들으시면서 "이 도구를 더 깊게 배우고 싶다"는 마음이 드시면, 그때 정규 포토샵·일러스트 과정으로 자연스럽게 연결됩니다. 실제로 많은 분들이 그렇게 시작하세요.</p>
+        <p>거꾸로 포토샵 6개월 배우고 "이걸로 뭘 만들지?" 막막한 분들보다, 결과물을 먼저 만들어보면 학습 동기가 훨씬 강해집니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q3. "20시간으로 정말 결과물이 나오나요?"</div>
+      <div class="faq-a">
+        <p>네, 케이스 수업으로 진행되기 때문에 가능합니다. 1일차 OT부터 10일차 포트폴리오 페이지까지 매 회차마다 결과물이 누적됩니다.</p>
+        <p>예시로 보여드리는 'Peonia' 핸드크림 브랜드는 모든 결과물이 수업 안에서 나온 것입니다. 노션 자료실에 결과물 가이드가 공개되어 있습니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q4. "수강료 대비 가성비는 어떤가요?"</div>
+      <div class="faq-a">
+        <p>비교해드리면 명확합니다.</p>
+        <p>• 외주 의뢰 시 비용: 로고 30~100만 + 패키지 50~150만 + 포스터 30~80만 = 최소 110만원 이상</p>
+        <p>• 정규 포토샵+일러스트 정규 과정: 통상 수개월, 100~200만원대</p>
+        <p>• 본 과정: 단기간 + 결과물 + AI 메타 스킬까지 함께 — 비용 대비 결과물 밀도가 가장 높은 구간</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q5. "왜 50세 미만만 받나요?"</div>
+      <div class="faq-a">
+        <p>AI 도구의 빠른 학습이 필요한 과정이고, 어도비 설치·계정 가입 등 IT 기본 환경 적응이 전제됩니다.</p>
+        <p>안정적인 학습 효과를 위해 연령 기준을 두고 있지만, IT 적응력이 좋으신 분은 사전 상담 후 가능합니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q6. "수업 끝나고 뭘 더 배워야 하나요?"</div>
+      <div class="faq-a">
+        <p>본 과정으로 'AI + 디자인'의 큰 그림을 잡으셨다면, 다음 단계는 보통 두 갈래로 나뉩니다.</p>
+        <p>① 포토샵·일러스트 정규 과정 → 도구를 깊이 마스터하고 세밀한 작업 가능</p>
+        <p>② 영상·모션그래픽 과정 → 정적 이미지 → 동적 콘텐츠로 확장</p>
+        <p>학생의 성향과 목표에 맞춰 상담 후 추천드립니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q7. "AI로 만든 결과물 저작권 문제는 없나요?"</div>
+      <div class="faq-a">
+        <p>Adobe Firefly는 상업적 사용이 공식 허용된 모델입니다. 본 과정에서는 도구별 저작권 정책을 함께 안내합니다.</p>
+        <p>상업적 안정성을 확보한 워크플로우 (Firefly → Photoshop → 최종 결과물) 흐름으로 가르치므로, 결과물을 실제 사용하셔도 안전합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 6</div>
+    <h1 class="part-title">경쟁 상황 & 우려사항 응대</h1>
+
+    <h2 class="sub-title" id="d-6-1">6-1. "다른 학원에서도 AI 디자인 수업 한다던데요?"</h2>
+    <p>→ <strong>차별점을 명확히 짚어주세요.</strong></p>
+    <ol class="numbered">
+      <li><strong>AI 5종을 도구별 강점으로 분류해서 가르침</strong> — (대부분은 ChatGPT 하나만 다루거나, 도구를 나열만 함)</li>
+      <li><strong>프롬프트 작성 가이드를 노션으로 제공</strong> — (수업이 끝나도 자료실로 계속 활용 가능)</li>
+      <li><strong>브랜드 1개를 풀 사이클로 완성하는 '케이스 수업'</strong> — (단편적 기능 강의가 아닌, 기획→완성까지 흐름 학습)</li>
+      <li><strong>어도비 정규 과정과 자연스럽게 연계</strong> — (다음 단계가 명확하다는 게 학원 시스템의 강점)</li>
+    </ol>
+
+    <h2 class="sub-title" id="d-6-2">6-2. "결과물이 진짜 상업 수준인가요?"</h2>
+    <ul class="bullets">
+      <li><strong>Peonia 케이스 결과물을 직접 보여주세요 (노션 페이지 활용)</strong></li>
+      <li>포스터, 디지털 배너, 패키지 모두 실제 사용 가능 수준</li>
+      <li>단, 본인 기획력과 노력에 따라 결과 차이가 있음을 솔직하게 설명 — 신뢰감 ↑</li>
+    </ul>
+
+    <h2 class="sub-title" id="d-6-3">6-3. "포토샵 정규 과정과 무엇이 다른가요?"</h2>
+    <div class="callout callout-ink">
+      <div class="callout-label">응대 핵심 멘트</div>
+      <p>"두 과정은 경쟁 관계가 아니라 보완 관계예요.</p>
+      <p>스타터 클래스는 '결과물을 빨리 만드는 법', 정규 과정은 '도구를 깊이 다루는 법'을 가르칩니다.</p>
+      <p>스타터로 재미와 결과를 보신 분들이 정규 과정으로 자연스럽게 넘어오시는 케이스가 많습니다."</p>
+    </div>
+
+    <h2 class="sub-title" id="d-6-4">6-4. "50세 이상도 가능한가요?"</h2>
+    <ul class="bullets">
+      <li><strong>원칙: 50세 미만</strong> (IT 적응력·디지털 도구 학습 효율 고려)</li>
+      <li>예외: 컴퓨터·스마트폰 활용이 능숙하신 분은 사전 상담 후 가능</li>
+      <li>거절 시: "포토샵 기초반" 등 대안 과정 안내로 부드럽게 전환</li>
+    </ul>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 7</div>
+    <h1 class="part-title">정규 과정 연결 전략 (Upsell Path)</h1>
+
+    <h2 class="sub-title" id="d-7-1">7-1. 학생 신호 캐치 → 정규 과정 추천 매핑</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th class="col-old">학생이 보이는 신호</th>
+          <th class="col-new">추천 정규 과정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>"이 부분 제가 직접 더 다듬고 싶어요"</td><td class="new-cell">포토샵 정규 과정</td></tr>
+        <tr><td>"로고 벡터 작업 더 배우고 싶어요"</td><td class="new-cell">일러스트 정규 과정</td></tr>
+        <tr><td>"영상으로도 만들고 싶어요" / "인스타 릴스 만들고 싶어요"</td><td class="new-cell">AI 영상 / 모션그래픽 과정</td></tr>
+        <tr><td>"브랜드를 큰 규모로 만들고 싶어요"</td><td class="new-cell">UI/UX · 편집디자인 과정</td></tr>
+        <tr><td>"이걸로 일을 받아보고 싶어요"</td><td class="new-cell">포트폴리오 심화 · 외주 실무 과정</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="d-7-2">7-2. 수료 후 follow-up 전략</h2>
+    <ol class="numbered">
+      <li><strong>수료 1주 내 follow-up 콜</strong> — "수업 결과물 어떻게 활용하고 계세요?" / "더 만들어보고 싶은 게 있으세요?"</li>
+      <li><strong>수료증 발급 시 정규 과정 안내 함께 제공</strong></li>
+      <li><strong>결과물을 SBS 인스타·블로그에 소개 (학생 동의 시)</strong> → 본인 홍보 + 다음 과정 연결</li>
+      <li><strong>패키지 할인 안내 (지점별 정책 적용)</strong> — "스타터 클래스 수강생 한정 정규 과정 할인" 같은 패키지로 ARPU 상승</li>
+    </ol>
+
+    <h2 class="sub-title" id="d-7-3">7-3. 본 과정의 ARPU 기여 시나리오</h2>
+    <div class="callout callout-accent">
+      <div class="callout-label">📈 LTV (Lifetime Value) 관점</div>
+      <p>1. AI 디자인 스타터 클래스 수강 → 디자인 흥미 확인</p>
+      <p>2. 정규 포토샵·일러스트 과정으로 연결 (50~70% 전환 목표)</p>
+      <p>3. 영상·모션그래픽 / UI·UX 과정으로 확장 (20~30% 추가 전환)</p>
+      <p>4. 1인 창업 / 외주 실무 과정 (10~15% 심화 전환)</p>
+      <p>→ 결과: 단기 스타터 1회 → 평균 2~3개 추가 과정 LTV 가능</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 8</div>
+    <h1 class="part-title">상담 클로징 멘트 & 금기어</h1>
+
+    <h2 class="sub-title" id="d-8-1">8-1. 관심도별 클로징 멘트</h2>
+
+    <h3 class="minor-title">📞 Soft Close — 관심도 낮음 / 비교 중인 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">관심 환기 멘트</div>
+      <p>"AI 디자인이 어디까지 가능한지 한번 경험해보시는 것만으로도 가치 있을 거예요.</p>
+      <p>20시간 단기 과정이라 부담도 적고, 끝나고 나면 본인 브랜드 결과물이 손에 남아요.</p>
+      <p>일단 자료 보시고 천천히 결정하셔도 됩니다."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Medium Close — 결정 직전 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">결정 도와주는 멘트</div>
+      <p>"고민되시는 부분이 ① 시간 ② 비용 ③ 결과물 중 어떤 거세요?</p>
+      <p>(고객 답변 후) → 그 부분 정리해드릴게요. 방학특강은 보통 정규 과정의 1/3 시간이고,</p>
+      <p>결과물은 정규 과정에서 6개월 차에 만나는 수준이에요. 비용은 외주 1건 의뢰비 정도예요."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Hard Close — 구매 직전 고객</h3>
+    <div class="callout callout-accent">
+      <div class="callout-label">결제 유도 멘트</div>
+      <p>"방학특강은 인원 제한이 있어서 빠르게 마감되는 편이에요.</p>
+      <p>우선 자리 예약해두시고, 일정 변경 필요하시면 사전에 가능해요.</p>
+      <p>지금 결제하시면 [얼리버드 / 패키지 할인 / 정규 과정 연계 혜택]도 함께 적용됩니다."</p>
+    </div>
+
+    <h2 class="sub-title" id="d-8-2">8-2. 절대 하지 말아야 할 멘트 (금기어)</h2>
+    <table class="taboo">
+      <thead>
+        <tr>
+          <th class="col-bad">❌ 금기 멘트</th>
+          <th class="col-good">✅ 대체 멘트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bad-cell">"포토샵 안 배워도 돼요"</td><td class="good-cell">"이 수업은 결과 중심이고, 더 깊게 배우고 싶으시면 정규 과정으로 이어집니다"</td></tr>
+        <tr><td class="bad-cell">"AI가 다 해줘요, 쉬워요"</td><td class="good-cell">"AI는 도구고, 결과물의 차이는 본인의 기획력과 프롬프트에서 나옵니다"</td></tr>
+        <tr><td class="bad-cell">"누구나 가능해요" (가볍게 들림)</td><td class="good-cell">"입문자도 가능하지만, 기획부터 완성까지 풀 사이클이라 밀도 있는 수업이에요"</td></tr>
+        <tr><td class="bad-cell">"정규 과정보다 빠르고 싸요"</td><td class="good-cell">"정규 과정과 목적이 달라요. 스타터는 결과 경험, 정규는 도구 마스터입니다"</td></tr>
+        <tr><td class="bad-cell">"AI가 디자이너를 대체해요"</td><td class="good-cell">"AI를 잘 다루는 사람이 새로운 경쟁력을 가지는 시대예요"</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="d-8-3">8-3. 상담 마무리 체크리스트</h2>
+    <ul class="checklist">
+      <li>☐ 학생의 목적 파악했나 (취업 / 창업 / 부업 / 취미)</li>
+      <li>☐ 가장 매력적이었던 결과물 1개 짚어줬나 (Peonia 노션 페이지 활용)</li>
+      <li>☐ 정규 과정 연계 경로 한 줄 언급했나</li>
+      <li>☐ 50세 미만 / IT 기본 활용 가능 여부 확인했나</li>
+      <li>☐ 결제 → 변경 가능 정책 안내했나</li>
+      <li>☐ 노션 자료 페이지 링크 전달했나</li>
+    </ul>
+  </div>
+
+  <div class="end-mark">— End of Design Starter Guide —</div>
+</section>
+
+<section id="tab-video" class="tab-content">
+
+  <div class="cover">
+    <div class="cover-eyebrow">2026 방학특강 영업 상담 가이드</div>
+    <h1 class="cover-title">AI 마케팅 영상 제작 과정</h1>
+    <p class="cover-subtitle">AI Marketing Video Production — Sales Playbook</p>
+    <p class="cover-en">Brand ad video in 10 days · 13-seat intensive</p>
+  </div>
+
+  <div class="callout callout-ink">
+    <div class="callout-label">⚡ 한 줄 포지셔닝</div>
+    <p>"<strong>10일 만에 내 브랜드 광고 영상 1편을 완성</strong>하는, 결과물 중심 프로젝트형 수업."</p>
+    <p>마케팅 이론 → AI 비주얼 제작 → CapCut 영상 편집 → 발표까지 풀 사이클 1회 경험.</p>
+    <p><strong>13명 한정·100% 대면.</strong> 비대면 운영 없음 — 소수정예 케어 보장.</p>
+  </div>
+
+  <h2 class="sub-title" id="v-overview">📌 과정 한눈에 보기</h2>
+  <table class="overview">
+    <tbody>
+      <tr><th>과정명</th><td>AI 마케팅 영상 제작 과정 (AI Marketing Video Production)</td></tr>
+      <tr><th>수업 시수</th><td>2시간 × 10일 = 총 20시간 (단기 집중·프로젝트형)</td></tr>
+      <tr><th>정원</th><td>13명 한정 — 비대면 미운영 / 100% 대면 진행</td></tr>
+      <tr><th>수업 방식</th><td>이론 학습 → AI 기획 → 비주얼 제작 → 영상 편집 → 발표 풀 사이클</td></tr>
+      <tr><th>난이도</th><td>★★☆☆☆ (마케팅·디자인 입문자 가능, 단 결과물 밀도는 높음)</td></tr>
+      <tr><th>수강 대상</th><td>비전공자·전공자 모두 가능 / 디자인 영상 입문자 환영</td></tr>
+      <tr><th>사용 도구</th><td>ChatGPT, Gemini, Midjourney, Canva, Gamma, CapCut</td></tr>
+      <tr><th>최종 결과물</th><td>내 브랜드 광고 영상 1편 + 브랜드 전략 자료 + 발표 자료</td></tr>
+      <tr><th>참고 결과물</th><td>필로우 미스트 광고 영상 (수업 완성도 레퍼런스)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 1</div>
+    <h1 class="part-title">왜 지금 이 과정인가 — 시장 상황 분석</h1>
+
+    <h2 class="sub-title" id="v-1-1">1-1. 영상 마케팅 시장의 현재 (2026)</h2>
+    <ul class="bullets">
+      <li>인스타 릴스 · 유튜브 쇼츠 · 틱톡 등 <strong>숏폼 광고 콘텐츠가 마케팅 표준</strong>으로 자리잡음 — 정적 이미지 광고만으로는 경쟁력 부족</li>
+      <li>Midjourney · Sora · Runway 등 AI 영상 도구 발전 → <strong>1인이 광고 영상 1편을 완성하는 시대</strong></li>
+      <li>외주 영상 제작 비용: 30초 광고 영상 1편 = 최소 100~300만원 (시장 평균)</li>
+      <li>기업 채용 공고에서 <strong style="color: var(--accent);">"숏폼 콘텐츠 제작 가능자 우대"</strong> 문구가 마케팅·기획·홍보 직군 표준이 됨</li>
+    </ul>
+
+    <h2 class="sub-title" id="v-1-2">1-2. 영상 1편이 만들어 내는 다중 활용 가치</h2>
+    <p>본 과정에서 만든 광고 영상 1편은 단순한 수업 결과물이 아니라, 학생의 모든 활동 무대에서 재활용 가능한 자산입니다.</p>
+    <table class="overview">
+      <tbody>
+        <tr><th>취업·이직</th><td>이력서 포트폴리오 URL · 자기소개서 차별화 · 면접 시 시연 자료</td></tr>
+        <tr><th>SNS 운영</th><td>인스타 릴스 · 유튜브 쇼츠 · 틱톡 즉시 업로드 가능</td></tr>
+        <tr><th>1인 창업</th><td>스마트스토어 상세페이지 · 브랜드 채널 광고물</td></tr>
+        <tr><th>부업·프리랜서</th><td>외주 포트폴리오 시작점 · 광고 영상 제작 의뢰 수주 가능성</td></tr>
+        <tr><th>기획·기록</th><td>브랜드 전략 자료 + 발표 자료 동반 제공 → 마케팅 사고 흐름 증빙</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-accent">
+      <div class="callout-label">💡 영업 시 강조 멘트</div>
+      <p>"영상 한 편을 한 번 만들어 두면, 이력서·인스타·면접·창업 자료까지 다 쓰여요.</p>
+      <p>외주 의뢰비 100~300만원짜리 결과물을 본인이 직접 만들어 보유하시는 거예요.</p>
+      <p>방학 안에 끝나는데, 끝나고 남는 자산은 굉장히 오래갑니다."</p>
+    </div>
+
+    <h2 class="sub-title" id="v-1-3">1-3. 본 과정이 시장에 적합한 이유</h2>
+    <div class="callout callout-accent">
+      <div class="callout-label">✅ Market Fit Check</div>
+      <p>1. 영상 콘텐츠 시대 — 마케팅 직군 표준 역량 확보</p>
+      <p>2. AI 도구 활용 능력 — 모든 직군의 메타 스킬</p>
+      <p>3. 13명 한정 소수정예 — 케어 밀도 보장, 결과물 완성도 ↑</p>
+      <p>4. 비전공자 가능 — 전공 무관 진로 옵션 제공 (특히 인문·사회·경영·어문)</p>
+      <p>5. AI 디자인 스타터 클래스와 연계 → 디자인+영상 듀얼 포트폴리오 완성 가능</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 2</div>
+    <h1 class="part-title">차별화 포인트 — 본 과정만의 강점</h1>
+
+    <h2 class="sub-title" id="v-2-1">2-1. 다른 영상·AI 수업과의 결정적 차이</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>비교 항목</th>
+          <th class="col-old">일반 영상·단순 AI 수업</th>
+          <th class="col-new">AI 마케팅 영상 과정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>수업 목표</th><td>기능 사용법 위주 (CapCut 단독 / GPT 단독)</td><td class="new-cell">마케팅 이론 + 광고 영상 1편 완성 + 사고법 훈련</td></tr>
+        <tr><th>도구 활용</th><td>1~2개 도구 단편 사용</td><td class="new-cell">AI 6종 + CapCut을 역할별로 통합 사용</td></tr>
+        <tr><th>결과물</th><td>기능 연습용 짧은 클립</td><td class="new-cell">내 브랜드 광고 영상 + 전략 자료 + 발표 자료</td></tr>
+        <tr><th>정원 / 케어</th><td>대규모·비대면 또는 자율 학습</td><td class="new-cell">13명 한정·100% 대면 (소수정예)</td></tr>
+        <tr><th>이론 깊이</th><td>도구 강의 중심, 이론 거의 없음</td><td class="new-cell">브랜드·소비자 심리·광고 기획 사고법 학습</td></tr>
+        <tr><th>확장성</th><td>단발성 수강 → 종료</td><td class="new-cell">AI 디자인·영상 정규 과정 로드맵 연계</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-accent">
+      <div class="callout-label">💡 영업 시 강조 멘트</div>
+      <p>"같은 캡컷·미드저니를 가르쳐도, 도구만 가르치는 수업과 광고 기획 사고를 함께 가르치는 수업은 결과물 수준이 완전히 달라요.</p>
+      <p>특히 13명 한정·대면 케어는 영상 과정에서 가장 중요한 부분이에요. 영상은 막히는 지점이 사람마다 달라서 강사가 옆에서 봐줘야 결과물이 나옵니다."</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 3</div>
+    <h1 class="part-title">핵심 세일즈 포인트 5가지</h1>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP1. "10일이면 내 브랜드 광고 영상 1편이 완성됩니다"</div>
+      <p>마케팅 이론(1~4일차) → 비주얼 제작(5~6일차) → 영상 편집(7~8일차) → 마케팅 레이아웃(9일차) → 발표(10일차)까지 <strong>풀 사이클 1회 경험</strong>. 학생은 수료 시점에 <strong style="color: var(--accent);">광고 영상 1편 + 브랜드 전략 자료 + 발표 자료</strong> 3종을 손에 얻습니다. 결과물 수준은 <strong>"필로우 미스트" 광고 영상</strong>을 레퍼런스로 참고하시면 됩니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP2. "13명 한정·100% 대면 — 소수정예 케어"</div>
+      <p>다른 방학특강과 가장 큰 차이는 <strong>정원 13명 한정·비대면 미운영</strong>입니다. 영상 제작은 <strong style="color: var(--accent);">단계별로 막히는 지점이 다르기 때문에 강사의 실시간 케어가 결과물 완성도를 결정</strong>합니다. 비대면·대규모로 진행하면 절대 나올 수 없는 밀도의 수업입니다. <strong>마감이 빠를 수 있으니 상담 시점에 정원 확인 필수.</strong></p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP3. "AI 도구 6종 + CapCut으로 실전 워크플로우"</div>
+      <p>학생이 "AI로 영상 만든다"고 막연히 알던 것을, 도구별 역할을 정확히 나눠서 가르칩니다:</p>
+      <table class="overview" style="margin-top: 12px;">
+        <tbody>
+          <tr><th>ChatGPT</th><td>브랜드 분석 · 카피라이팅 · 광고 콘티 · 발표 자료 초안</td></tr>
+          <tr><th>Gemini</th><td>사실적 비주얼 · 광고 사례 분석 · 트렌드 리서치</td></tr>
+          <tr><th>Midjourney</th><td>광고 키비주얼 · 브랜드 무드보드 · 장면별 이미지 생성</td></tr>
+          <tr><th>Canva</th><td>브랜드 메시지 보드 · 톤앤매너 정리 · 마케팅 시안</td></tr>
+          <tr><th>Gamma</th><td>발표 자료 · 마케팅 포트폴리오 자동 생성</td></tr>
+          <tr><th>CapCut</th><td>숏폼 영상 편집 · 자막·BGM · 장면 전환·CTA</td></tr>
+        </tbody>
+      </table>
+      <p>→ 한 도구만 의존하지 않는 <strong style="color: var(--accent);">현업 광고/마케팅 워크플로우 그대로</strong>를 익히는 것이 본 과정의 핵심입니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP4. "전공 무관 — 인문·사회·경영·어문 모두 환영"</div>
+      <p>마케팅은 <strong>거의 모든 전공의 진로 옵션</strong>입니다. 인문계열 학생이 취업을 고민할 때 빠지지 않고 등장하는 키워드가 마케팅·홍보·기획·브랜드입니다. 본 과정은 <strong style="color: var(--accent);">디자인·영상 비전공자도 가능</strong>하도록 설계되어 있어, <strong>전공이 무엇이든 마케팅 직군에 지원할 때 차별화된 무기</strong>를 만들어 줍니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP5. "마케팅 + 디자인 + 영상 통합 사고 훈련"</div>
+      <p>단순히 캡컷 사용법이 아니라 <strong>브랜드 이해 → 소비자 심리 → 광고 흐름 설계 → 시퀀스 구성 → CTA</strong>까지 <strong style="color: var(--accent);">광고 기획자의 사고 흐름</strong>을 그대로 배웁니다. 도구는 바뀌어도 이 사고법은 평생 활용 가능한 자산이 됩니다.</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 4</div>
+    <h1 class="part-title">타겟 고객별 어필 메시지</h1>
+
+    <div class="target-grid">
+      <div class="target-card">
+        <h4>👨‍🎓 대학생 / 취준생 (인문·사회·경영·어문 등 전공 무관)</h4>
+        <ul>
+          <li>"전공 무관, 마케팅·홍보·기획 직군 어디든 통하는 포트폴리오"</li>
+          <li>면접에서 "포트폴리오 있으세요?" 질문에 "네, 광고 영상 한 편 있습니다" 답할 수 있는 무기</li>
+          <li>AI 활용 역량 = 직군·산업 무관 핵심 메타 스킬</li>
+          <li>방학 안에 끝나서 학기 영향 X</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>💼 직장인 / 부업 준비자</h4>
+        <ul>
+          <li>"퇴근 후 학원 다닐 시간 없는 분에게 휴가/방학 10일 압축 코스"</li>
+          <li>인스타·유튜브 채널 운영자 → 즉시 콘텐츠 제작에 활용</li>
+          <li>스마트스토어·이커머스 운영자 → 상품 광고 영상 직접 제작</li>
+          <li>외주 의뢰비 절감 (영상 1편 100~300만원 → 본인 제작)</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🏪 1인 창업자 / 사장님 / 소상공인</h4>
+        <ul>
+          <li>"광고 대행사 안 거치고, 광고 영상을 직접 만들 수 있어요"</li>
+          <li>신메뉴·신제품 출시 영상 즉시 제작</li>
+          <li>릴스·쇼츠로 매장 홍보 → 매출과 직결</li>
+          <li>트렌드 빠르게 반영 (대행 안 거치면 1주일 단축)</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🔄 30~40대 커리어 전환 희망자</h4>
+        <ul>
+          <li>"AI 시대 마케팅 콘텐츠 직군은 가장 큰 수요처"</li>
+          <li>프리랜서 광고 영상 제작자 가능성</li>
+          <li>브랜드 컨설팅 · 1인 마케터 진입 경로</li>
+          <li>50세 미만 / IT 적응력 가능자</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 5</div>
+    <h1 class="part-title">상담 현장 FAQ — 자주 받는 질문 & 응대법</h1>
+
+    <div class="faq-item">
+      <div class="faq-q">Q1. "AI랑 CapCut이 다 해주는데 굳이 배워야 하나요?"</div>
+      <div class="faq-a">
+        <p>도구를 켜는 건 누구나 할 수 있지만, 결과물의 수준은 "기획 → 영상 흐름 설계 → 도구 활용" 능력에 따라 천차만별입니다.</p>
+        <p>본 과정은 단순 도구 사용법이 아니라 광고 기획자의 사고 흐름을 가르칩니다.</p>
+        <p>필로우 미스트 영상 같은 수준이 그냥 나오지 않는 이유, 그 차이를 만드는 게 이 수업입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q2. "영상 편집 한번도 안 해본 사람도 가능한가요?"</div>
+      <div class="faq-a">
+        <p>네, 전공·경험 무관입니다. 비전공자·디자인 입문자 가능하도록 설계되어 있어요.</p>
+        <p>CapCut은 무료에 직관적이라 배우는 게 어렵지 않고, AI 도구가 비주얼·아이디어를 대신 만들어 줘서 진입장벽이 낮아요.</p>
+        <p>다만 결과물 밀도가 높은 수업이라 "가볍게 듣는 수업"은 아닙니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q3. "왜 13명만 받나요? 비대면도 안 되나요?"</div>
+      <div class="faq-a">
+        <p>영상 제작은 단계별로 막히는 지점이 사람마다 다릅니다. 강사가 실시간으로 케어해야 결과물 완성도가 보장됩니다.</p>
+        <p>비대면·대규모 강의로는 "필로우 미스트" 같은 수준의 영상이 나올 수 없어요. 그래서 정원과 운영 방식을 일부러 제한했습니다.</p>
+        <p>역으로 말씀드리면 13명 안에 들어가시면 그만큼 케어 받으신다는 의미입니다. 정원 마감 빠를 수 있어서 빠른 결정 권유드려요.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q4. "이 과정이 다른 영상 편집 수업과 뭐가 다른가요?"</div>
+      <div class="faq-a">
+        <p>일반 영상 편집 수업은 CapCut·프리미어 같은 도구 사용법을 가르치는 경우가 많아요. 이 과정은 "영상을 어떻게 만드는가"가 아니라 "왜 이런 영상을 만들어야 광고가 되는가"부터 가르칩니다.</p>
+        <p>1~4일차에 브랜드·소비자 심리·광고 흐름·CTA까지 마케팅 사고를 다지고, 5일차부터 도구를 잡습니다.</p>
+        <p>그래서 같은 CapCut을 써도 결과물이 "개인 SNS용 클립"이 아니라 "광고 영상"으로 나옵니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q5. "10일로 정말 광고 영상이 나오나요?"</div>
+      <div class="faq-a">
+        <p>네, 프로젝트형 수업이라 가능합니다. 1일차 브랜드 기획부터 10일차 발표까지 매일 결과물이 누적됩니다.</p>
+        <p>1~4일차: 마케팅 이론 + 브랜드/광고 기획</p>
+        <p>5~6일차: AI로 비주얼·콘티 제작</p>
+        <p>7~8일차: CapCut으로 숏폼 영상 편집</p>
+        <p>9~10일차: 마케팅 레이아웃 정리 + 발표</p>
+        <p>필로우 미스트 영상이 수업 레퍼런스로 제공되니, 학생 수준에 따라 그 정도까지 완성 가능합니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q6. "AI 마케팅 영상 과정과 AI 디자인 스타터 클래스, 둘 중 어느 게 좋아요?"</div>
+      <div class="faq-a">
+        <p>목적이 다릅니다. 둘 다 들으시면 디자인+영상 듀얼 포트폴리오가 완성돼요.</p>
+        <p>▸ AI 디자인 스타터 클래스 → 정적 결과물 (로고·패키지·포스터·디지털 배너)</p>
+        <p>▸ AI 마케팅 영상 과정 → 동적 결과물 (광고 영상·브랜드 캠페인)</p>
+        <p>마케팅 직군 지원하실 거면 "영상 과정", 디자인 직군이나 1인 창업·SNS 운영이면 "디자인 스타터"를 추천드려요.</p>
+        <p>방학 1번에 둘 다 듣고 가시는 분들도 많습니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q7. "AI로 만든 광고 영상, 저작권은 괜찮나요?"</div>
+      <div class="faq-a">
+        <p>수업에서 도구별 상업적 사용 정책을 안내드립니다.</p>
+        <p>Midjourney 유료 플랜은 상업적 사용 허용, ChatGPT 생성 이미지·텍스트도 OpenAI 약관상 사용 가능합니다.</p>
+        <p>CapCut도 무료 라이브러리는 상업적 사용 가능 (라이선스 표시된 BGM 주의).</p>
+        <p>상업적 안전 워크플로우 그대로 가르치니 결과물을 실제 사용해도 문제 없습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 6</div>
+    <h1 class="part-title">경쟁 상황 & 우려사항 응대</h1>
+
+    <h2 class="sub-title" id="v-6-1">6-1. "영상 한 편으로 정말 충분한가요?"</h2>
+    <p>→ <strong>한 편의 "밀도"와 "활용도"를 짚어주세요.</strong></p>
+    <ul class="bullets">
+      <li><strong>결과물 1편이 단순 영상이 아닌, 마케팅 사고 전체 흐름이 담긴 "기획+비주얼+편집" 통합 결과물</strong></li>
+      <li><strong>한 편 = 이력서·면접·인스타·유튜브 쇼츠·창업·부업까지 모든 채널에 동시 활용</strong></li>
+      <li><strong>한 편을 깊게 만들어 본 사람은 두 번째·세 번째 영상을 훨씬 빠르게 제작 가능 — 본 과정은 "한 편 + 사고법" 학습</strong></li>
+    </ul>
+
+    <h2 class="sub-title" id="v-6-2">6-2. "다른 학원에도 AI 영상 수업 있던데요?"</h2>
+    <p>→ <strong>차별점 4가지를 명확히 짚어주세요.</strong></p>
+    <ol class="numbered">
+      <li><strong>13명 한정·100% 대면 — 케어 밀도</strong> (대부분은 대규모 또는 비대면 — 영상 결과물 완성도 차이 큼)</li>
+      <li><strong>AI 6종 + CapCut — 도구별 강점 정확히 분리해서 가르침</strong> (보통은 ChatGPT 또는 CapCut 하나만 다룸)</li>
+      <li><strong>마케팅 이론부터 시작 — 단순 도구 강의가 아닌 광고 기획 사고법</strong> (도구만 가르치는 곳과 결과물 깊이 차이)</li>
+      <li><strong>AI 디자인 스타터 + 정규 영상/마케팅 과정으로 연계</strong> (단발성이 아닌 학습 로드맵 보유)</li>
+    </ol>
+
+    <h2 class="sub-title" id="v-6-3">6-3. "결과물이 진짜 필로우 미스트 수준 나와요?"</h2>
+    <ul class="bullets">
+      <li><strong>필로우 미스트 영상을 직접 보여주세요 (수업 레퍼런스 영상)</strong></li>
+      <li>학생 수준 및 노력도에 따라 차이는 있음을 솔직하게 안내 — 신뢰감 ↑</li>
+      <li>13명 정원·대면 케어 덕분에 "평균 이상"의 영상이 안정적으로 나옴</li>
+      <li>이전 기수 결과물 1~2개 사례 추가 안내 (있다면)</li>
+    </ul>
+
+    <h2 class="sub-title" id="v-6-4">6-4. "수강료 대비 가성비가 어떤가요?"</h2>
+    <p>다음 비교를 참고해서 안내해 주세요.</p>
+    <ul class="bullets">
+      <li>외주 광고 영상 의뢰비: 30초 1편 = 100~300만원</li>
+      <li>본 과정: 광고 영상 1편 + 마케팅 사고법 + AI 도구 6종 + CapCut 활용 — 비용 대비 결과 밀도 최상</li>
+    </ul>
+
+    <h2 class="sub-title" id="v-6-5">6-5. "50세 이상도 가능한가요?"</h2>
+    <ul class="bullets">
+      <li><strong>원칙: 50세 미만</strong> (영상 편집·AI 도구 학습 효율 고려)</li>
+      <li>예외: IT·스마트폰 활용 능숙한 분은 사전 상담 후 가능</li>
+      <li>거절 시: "포토샵 기초반" 또는 "AI 디자인 스타터 클래스" 등 대안 안내로 부드럽게 전환</li>
+    </ul>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 7</div>
+    <h1 class="part-title">정규 과정 연결 전략 (Upsell Path)</h1>
+
+    <h2 class="sub-title" id="v-7-1">7-1. 학생 신호 캐치 → 추천 과정 매핑</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th class="col-old">학생이 보이는 신호</th>
+          <th class="col-new">추천 정규/연계 과정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>"브랜드 비주얼(로고·패키지)도 직접 만들고 싶어요"</td><td class="new-cell">AI 디자인 스타터 클래스 (동반 수강)</td></tr>
+        <tr><td>"영상 편집을 더 깊게 배우고 싶어요"</td><td class="new-cell">프리미어·애프터이펙트 정규 과정 (영상편집/모션그래픽)</td></tr>
+        <tr><td>"디자인 시안 작업을 더 다듬고 싶어요"</td><td class="new-cell">포토샵·일러스트 정규 과정</td></tr>
+        <tr><td>"마케팅·콘텐츠로 일을 받아보고 싶어요"</td><td class="new-cell">SNS·콘텐츠 마케터 실무 과정</td></tr>
+        <tr><td>"내 브랜드 운영해보고 싶어요"</td><td class="new-cell">1인 창업·스마트스토어 실무 과정</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="v-7-2">7-2. AI 디자인 스타터 ↔ AI 마케팅 영상 듀얼 패키지 전략</h2>
+    <div class="callout callout-ink">
+      <div class="callout-label">📦 두 과정 함께 권하면 좋은 케이스</div>
+      <p>▸ 마케팅·홍보·브랜드 진로 학생 → 영상(필수) + 디자인(권장)</p>
+      <p>▸ 1인 창업자·소상공인 → 디자인(필수) + 영상(권장)</p>
+      <p>▸ 인스타·유튜브 콘텐츠 운영자 → 디자인 + 영상 모두 필수</p>
+      <p>▸ "방학 한번에 끝내고 싶어요" 학생 → 시간표 조정 가능하면 패키지 권유</p>
+      <p>→ 두 과정 동반 수강 시 듀얼 포트폴리오(정적+동적) 완성, 취업/창업 시 경쟁력 최대화</p>
+    </div>
+
+    <h2 class="sub-title" id="v-7-3">7-3. 수료 후 follow-up 전략</h2>
+    <ol class="numbered">
+      <li><strong>수료 1주 내 follow-up 콜</strong> — "발표한 광고 영상 SNS에 올려보셨어요?" / "다음 단계 고민 있으세요?"</li>
+      <li><strong>결과물 SNS 노출 (학생 동의 시)</strong> — 다음 기수 모객 + 본인 홍보 동시</li>
+      <li><strong>수강생 한정 정규 과정 할인 안내</strong></li>
+      <li><strong>취업 시즌 별 follow-up</strong> — 포트폴리오 활용 방법 안내</li>
+    </ol>
+
+    <h2 class="sub-title" id="v-7-4">7-4. LTV (Lifetime Value) 시나리오</h2>
+    <div class="callout callout-accent">
+      <div class="callout-label">📈 본 과정의 LTV 기여 흐름</div>
+      <p>1. AI 마케팅 영상 과정 → 영상 콘텐츠 흥미 + 포트폴리오 확보</p>
+      <p>2. AI 디자인 스타터 클래스 동반 (30~40% 추가 전환 목표)</p>
+      <p>3. 영상 편집 또는 마케팅 정규 과정 연결 (40~50% 추가 전환)</p>
+      <p>4. 1인 창업·실무 심화 과정 (15~20% 심화 전환)</p>
+      <p>→ 결과: 단기 영상 1회 → 평균 2~3개 추가 과정 LTV 가능</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 8</div>
+    <h1 class="part-title">상담 클로징 멘트 & 금기어</h1>
+
+    <h2 class="sub-title" id="v-8-1">8-1. 관심도별 클로징 멘트</h2>
+
+    <h3 class="minor-title">📞 Soft Close — 관심도 낮음 / 비교 중인 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">관심 환기 멘트</div>
+      <p>"광고 영상 만드는 게 어디까지 가능한지 한번 경험해보시는 것만으로도 가치 있을 거예요.</p>
+      <p>20시간 단기 과정이라 부담도 적고, 끝나고 나면 본인 광고 영상 1편이 손에 남아요.</p>
+      <p>필로우 미스트 영상 한번 보시고 결정하셔도 됩니다 — 이 정도 결과물이 나옵니다."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Medium Close — 결정 직전 고객 (관심 분야 명확화)</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">결정 도와주는 멘트</div>
+      <p>"어떤 결과물이 더 끌리세요? 정적 비주얼(로고·패키지·포스터) vs 동적 콘텐츠(광고 영상)?</p>
+      <p>(고객 답변 후) → 영상 쪽이면 이 과정이 정답이에요. 디자인 쪽이면 AI 디자인 스타터 클래스 권해드릴게요.</p>
+      <p>둘 다 끌리시면 패키지로 들으시는 분도 많으세요. 영상 과정은 13명 정원이라 마감되면 다음 방학까지 기다리셔야 해요."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Hard Close — 구매 직전 고객</h3>
+    <div class="callout callout-accent">
+      <div class="callout-label">결정 유도 멘트</div>
+      <p>"이 과정은 정원이 13명이고 비대면이 안 돼서 마감이 빠른 편이에요.</p>
+      <p>오늘 자리 잡아두시면 일정 변경은 사전 협의 가능합니다.</p>
+      <p>지금 결제하시면 [얼리버드 / AI 디자인 스타터 클래스 패키지 / 정규 과정 연계 할인] 혜택도 함께 적용됩니다."</p>
+    </div>
+
+    <h2 class="sub-title" id="v-8-2">8-2. 절대 하지 말아야 할 멘트 (금기어)</h2>
+    <table class="taboo">
+      <thead>
+        <tr>
+          <th class="col-bad">❌ 금기 멘트</th>
+          <th class="col-good">✅ 대체 멘트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bad-cell">"이거만 들으면 광고 만들 수 있어요"</td><td class="good-cell">"이 과정으로 영상 기획·제작 흐름을 잡으시고, 더 깊은 영상 작업은 정규 영상 과정으로 이어집니다"</td></tr>
+        <tr><td class="bad-cell">"AI랑 캡컷이 다 해줘요, 쉬워요"</td><td class="good-cell">"도구는 친화적이지만, 결과물 수준은 기획력과 사고법에서 갈립니다"</td></tr>
+        <tr><td class="bad-cell">"필로우 미스트 영상이 무조건 나와요"</td><td class="good-cell">"그 정도가 레퍼런스이고, 학생 수준에 따라 결과 차이가 있어요. 13명 정원 케어로 평균 이상 안정적으로 나옵니다"</td></tr>
+        <tr><td class="bad-cell">"누구나 들을 수 있어요"</td><td class="good-cell">"비전공자·입문자 가능하지만, 마케팅·영상 모두 다루는 밀도 있는 수업이에요"</td></tr>
+        <tr><td class="bad-cell">"영상 편집 정규 과정 안 들어도 돼요"</td><td class="good-cell">"이 수업으로 영상 제작 큰 그림을 잡으시고, 더 깊게 배우고 싶으면 정규 영상 과정으로 이어집니다"</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="v-8-3">8-3. 상담 마무리 체크리스트</h2>
+    <ul class="checklist">
+      <li>☐ 학생의 진로 방향 파악했나 (마케팅/콘텐츠 vs 사무/금융 vs 기타)</li>
+      <li>☐ 학생의 전공·학년 파악했나 (인문·사회·경영·어문 강조 포인트 활용)</li>
+      <li>☐ 13명 정원·비대면 미운영 안내했나 (마감 압박 효과)</li>
+      <li>☐ 필로우 미스트 영상 보여줬거나 링크 전달했나</li>
+      <li>☐ AI 디자인 스타터 클래스와의 패키지 가능성 안내했나</li>
+      <li>☐ 50세 미만 / IT 기본 활용 가능 여부 확인했나</li>
+      <li>☐ 결제 → 일정 변경 가능 정책 안내했나</li>
+    </ul>
+  </div>
+
+  <div class="end-mark">— End of Marketing Video Guide —</div>
+</section>
+
+<section id="tab-prompt1" class="tab-content">
+
+  <div class="cover">
+    <div class="cover-eyebrow">2026 리뉴얼 정규과정 영업 상담 가이드</div>
+    <h1 class="cover-title">AI 프롬프트 엔지니어링 1단계</h1>
+    <p class="cover-subtitle">(리뉴얼 — AI-POT 자격증 취득 과정)</p>
+    <p class="cover-en">Prompt Engineering (Renewed) · Office Automation + KPC AI-POT</p>
+  </div>
+
+  <div class="callout callout-ink">
+    <div class="callout-label">⚡ 한 줄 포지셔닝</div>
+    <p>"수강료 <strong>60만 → 40만</strong>으로 낮추고, <strong>자격증 취득까지 가능</strong>하도록 가치는 끌어올린 리뉴얼 과정."</p>
+    <p>이론 강의가 아닌 첫날부터 결과물 나오는 실습 중심 → 마지막 2일 자격증 대비.</p>
+    <p>수료 시 <strong>생산성본부 주관 AI-POT 자격증</strong> 응시 준비 완료.</p>
+  </div>
+
+  <h2 class="sub-title" id="p1-overview">📌 과정 한눈에 보기</h2>
+  <table class="overview">
+    <tbody>
+      <tr><th>과정명</th><td>AI 프롬프트 엔지니어링 (리뉴얼)</td></tr>
+      <tr><th>수강료</th><td><strong style="color: var(--accent);">40만원</strong> (구 60만원 → 33% 인하)</td></tr>
+      <tr><th>수업 시수</th><td>8일 과정</td></tr>
+      <tr><th>수업 방식</th><td>실습 중심 (1~6일차) + 자격증 대비 (7~8일차)</td></tr>
+      <tr><th>수강 대상</th><td>AI 활용 직장인 · 자격증 준비자 · 비전공자 입문자</td></tr>
+      <tr><th>사용 도구</th><td>Chat GPT, NotebookLM, Gamma AI, Canva, Codex, Perplexity, Visual Studio Code</td></tr>
+      <tr><th>최종 결과물</th><td>PPT · 나만의 GPTs 챗봇 · 코딩게임 · 자동화 워크플로우 · 자격증</td></tr>
+      <tr><th>자격증</th><td>생산성본부(KPC) 주관 <strong>AI-POT</strong> 응시 준비</td></tr>
+    </tbody>
+  </table>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 1</div>
+    <h1 class="part-title">왜 지금 이 리뉴얼 과정인가</h1>
+
+    <h2 class="sub-title" id="p1-1-1">1-1. 시장 변화 — 프롬프트 엔지니어링은 이제 '기본 소양'</h2>
+    <ul class="bullets">
+      <li>2025년 "AI 잘 쓰는 능력"이 <strong>직군 무관 핵심 메타 스킬</strong>로 자리잡음 — 사무·기획·마케팅·교육·창업 모두 해당</li>
+      <li>기업 채용에서 <strong style="color: var(--accent);">"생성형 AI 활용 가능자 우대"</strong> 표기 급증 — 자격증으로 증빙 가능한 지원자가 유리</li>
+      <li>프롬프트 엔지니어링은 "이론을 아는가"가 아닌 "실무 자동화에 쓰는가"로 평가 기준이 이동</li>
+      <li>AI 기본 사용은 보편화 → 차별화는 'GPTs 제작·코딩 자동화·업무 워크플로우 구축' 같은 응용력</li>
+    </ul>
+
+    <h2 class="sub-title" id="p1-1-2">1-2. 리뉴얼의 4대 핵심 변화</h2>
+    <div class="callout callout-ink">
+      <div class="callout-label">🔄 What's New</div>
+      <p>1. 💰 <strong>가격: 60만원 → 40만원</strong> (33% 인하, 진입장벽 대폭 완화)</p>
+      <p>2. 📚 <strong>학습 방식: 이론 중심 → 실습 중심</strong> (첫날부터 결과물)</p>
+      <p>3. 🎯 <strong>자격증: 이론 학습만 → 생산성본부 AI-POT 자격증 응시 가능</strong></p>
+      <p>4. 🛠 <strong>결과물: 콘텐츠 위주 → 업무 자동화·생산성 도구 위주</strong></p>
+    </div>
+
+    <h2 class="sub-title" id="p1-1-3">1-3. AI-POT 자격증의 가치</h2>
+    <p><strong>AI-POT (AI Prompt Engineering Test)</strong>는 <strong>사단법인 한국생산성본부(KPC) 주관</strong>의 공인 자격증입니다. KPC는 컴활·MOS·ITQ 등을 운영하는 기관으로, <strong style="color: var(--accent);">공신력과 인지도가 검증된 자격 발급 기관</strong>입니다.</p>
+    <ul class="bullets">
+      <li>이력서 자격증 란에 "AI-POT (생산성본부)" 정식 기재 가능</li>
+      <li>"AI 활용 가능자"를 객관적으로 증명할 수 있는 거의 유일한 공인 자격</li>
+      <li>자격증 + 실습 결과물 동시 보유 → 단순 자격증 응시자 대비 차별화</li>
+    </ul>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 2</div>
+    <h1 class="part-title">기존 과정 vs 리뉴얼 과정 — 정확히 무엇이 달라졌는가</h1>
+
+    <h2 class="sub-title" id="p1-2-1">2-1. 한눈에 보는 비교</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th class="col-old">기존 1단계 (이론 중심)</th>
+          <th class="col-new">리뉴얼 (실습 + 자격증)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>수강료</th><td>60만원</td><td class="new-cell">40만원 (33% ↓)</td></tr>
+        <tr><th>수업 무게중심</th><td>이론 70% / 실습 30%</td><td class="new-cell">실습 75% / 이론 25%</td></tr>
+        <tr><th>초반 학습 흐름</th><td>LLM 정의·환각·마크다운 등 이론 강의로 진입</td><td class="new-cell">NotebookLM 자료 정리·PPT 제작으로 즉시 결과물 체험</td></tr>
+        <tr><th>결과물 성격</th><td>동화책·이미지·음원 등 콘텐츠 중심</td><td class="new-cell">PPT·자동화·코딩게임·이메일 비서 등 실용형</td></tr>
+        <tr><th>자격증</th><td>이론 학습만 (응시 직접 준비 필요)</td><td class="new-cell">AI-POT 자격증 기출 풀이까지 완성</td></tr>
+        <tr><th>고급 도구</th><td>뤼튼·Gemini·Canva·Suno 등 콘텐츠 도구</td><td class="new-cell">NotebookLM·Gamma AI·Codex·Perplexity 등 생산성 도구</td></tr>
+        <tr><th>수료 후 활용</th><td>이론 지식 + 콘텐츠 결과물</td><td class="new-cell">공인 자격증 + 업무 자동화 능력 + 실용 결과물</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="p1-2-2">2-2. 일자별 커리큘럼 비교</h2>
+    <table class="day-compare">
+      <thead>
+        <tr>
+          <th>일차</th>
+          <th class="col-old">기존 1단계</th>
+          <th class="col-new">리뉴얼</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="day-num">1</td><td>OT + 뤼튼 사용법</td><td class="new-cell">OT + 퍼스널 설정 + 환각현상</td></tr>
+        <tr><td class="day-num">2</td><td>GPT 퍼스널 설정 / 제로샷·원샷·퓨샷</td><td class="new-cell">NotebookLM 자료 정리</td></tr>
+        <tr><td class="day-num">3</td><td>LLM 정의·한계 / 환각 / 마크다운 (이론)</td><td class="new-cell">Chat GPT + Gamma AI + Canva로 PPT 제작</td></tr>
+        <tr><td class="day-num">4</td><td>동화책 제작 (GPT + Gemini + Canva)</td><td class="new-cell">나만의 GPTs 챗봇 제작 (이미지·엑셀함수)</td></tr>
+        <tr><td class="day-num">5</td><td>토큰·후카츠·페르소나·AI 윤리 (이론)</td><td class="new-cell">파일 관리 + Codex 코딩게임 제작</td></tr>
+        <tr><td class="day-num">6</td><td>CoT/ToT 이론 + Lily AI 요약</td><td class="new-cell">사무 자동화 (자동 요약·이메일 비서·업무 브리핑)</td></tr>
+        <tr><td class="day-num">7</td><td>멀티모달 (이미지·영상·음성·음악)</td><td class="new-cell">AI-POT 자격증 이론 정리</td></tr>
+        <tr><td class="day-num">8</td><td>GPTs 제작</td><td class="new-cell">AI-POT 기출문제 생성 + 풀이</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-accent">
+      <div class="callout-label">💡 영업 시 강조 멘트</div>
+      <p>"같은 8일 과정이지만, 첫날부터 결과물 만들기 시작하는 점이 가장 큰 차이예요.</p>
+      <p>기존 과정이 "AI 이론 강의"였다면, 리뉴얼은 "AI로 실제 업무 자동화하는 훈련"입니다.</p>
+      <p>그리고 마지막 2일은 자격증 대비라서, 수료하면 AI-POT 응시 준비까지 완성돼요."</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 3</div>
+    <h1 class="part-title">핵심 세일즈 포인트 5가지</h1>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP1. "60만원 → 40만원, 가격은 낮추고 가치는 끌어올렸습니다"</div>
+      <p>기존 60만원에서 <strong>33% 인하된 40만원</strong>으로 진입장벽을 낮췄습니다. 그러나 <strong style="color: var(--accent);">자격증 취득 가능·실습 비중 강화·생산성 도구 추가</strong>로 수업 가치는 오히려 상승. "가격 인하 = 가치 축소"가 아닌 <strong>"진입장벽 인하 + 가치 강화"의 리뉴얼</strong>임을 강조하세요.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP2. "수료 시 생산성본부 AI-POT 자격증 응시 준비 완료"</div>
+      <p>마지막 2일차에 <strong>AI-POT 이론 정리 + 기출문제 생성 + 풀이</strong>를 진행합니다. 수강생은 수료 시점에 응시 준비가 되어 있으며, <strong>사단법인 한국생산성본부</strong>(컴활·MOS·ITQ 운영기관)의 <strong style="color: var(--accent);">공신력 있는 AI 자격증을 이력서에 정식 기재</strong>할 수 있습니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP3. "이론 강의가 아닌, 첫날부터 결과물 나오는 실습 중심"</div>
+      <p>8일차 구성으로 수강생이 매일 얻는 결과물:</p>
+      <table class="result-list" style="margin-top: 12px;">
+        <tbody>
+          <tr><td class="day-num">1일</td><td>Chat GPT 퍼스널 설정 완료 (본인 직무 맞춤형 응답 환경)</td></tr>
+          <tr><td class="day-num">2일</td><td>NotebookLM으로 정리된 자료 / 인포그래픽 / 보고서</td></tr>
+          <tr><td class="day-num">3일</td><td>Chat GPT + Gamma AI + Canva로 만든 디자인 PPT</td></tr>
+          <tr><td class="day-num">4일</td><td>나만의 전용 GPTs 챗봇 (이미지·엑셀함수 자동화)</td></tr>
+          <tr><td class="day-num">5일</td><td>AI가 정리해 준 파일 시스템 + 본인 코딩게임</td></tr>
+          <tr><td class="day-num">6일</td><td>자동 요약 워크플로우 + AI 이메일 비서 + 업무 브리핑 자동화</td></tr>
+          <tr><td class="day-num">7~8일</td><td>AI-POT 자격증 이론 정리 + 기출문제 풀이 완료</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP4. "Codex 코딩 자동화까지 — 비개발자도 코딩 결과물"</div>
+      <p>5일차에 <strong>Codex와 Visual Studio Code</strong>를 활용해 <strong style="color: var(--accent);">비개발자도 본인만의 코딩 게임을 제작</strong>합니다. AI 시대에 "코드를 직접 짤 줄 모르지만 AI로 동작하는 결과물을 만들 줄 안다"는 능력은 <strong>차별화의 정점</strong>입니다. 동시에 <strong>사무 업무 자동화</strong>(파일 관리·자동 요약·AI 이메일 비서)까지 학습 — 실무 ROI 최상.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP5. "비전공자·AI 입문자도 가능, 직장인 직무 ROI 최상"</div>
+      <ul class="bullets">
+        <li><strong>Chat GPT를 써본 적 있는 정도면 충분 — 진입장벽 낮음</strong></li>
+        <li>8일 단기 집중 → 직장인도 휴가·주말 활용해 수강 가능</li>
+        <li>배우는 도구가 "콘텐츠 도구"가 아닌 "업무 도구" → 회사에서 바로 사용</li>
+        <li>자격증 + 결과물 + 자동화 능력 = 수강료 회수 빠름</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 4</div>
+    <h1 class="part-title">타겟 고객별 어필 메시지</h1>
+
+    <div class="target-grid">
+      <div class="target-card">
+        <h4>💼 직장인 / 사무직</h4>
+        <ul>
+          <li>"회사 업무 자동화에 즉시 활용 — 보고서·이메일·자료 정리 시간 단축"</li>
+          <li>NotebookLM·Codex·자동 요약 등 "진짜 업무 도구" 학습</li>
+          <li>자격증으로 이력서 가치 상승 + 사내 AI 역량 인증</li>
+          <li>휴가·주말 8일로 압축 가능</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🎓 대학생 / 취준생</h4>
+        <ul>
+          <li>"공인 AI 자격증 = 이력서 차별화 무기" (KPC 발급)</li>
+          <li>사무 자동화·코딩·PPT 제작 등 직군 무관 활용</li>
+          <li>GPTs 챗봇 제작 = 면접에서 어필 가능한 결과물</li>
+          <li>AI 디자인·영상 과정과 함께 들으면 듀얼 포트폴리오 완성</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🏪 1인 창업자 / 소상공인 / 프리랜서</h4>
+        <ul>
+          <li>"외주 안 거치고 본인이 직접 자동화 시스템 구축"</li>
+          <li>이메일·자료 정리·PPT·상세페이지 자동화로 시간 확보</li>
+          <li>GPTs로 본인 사업에 특화된 챗봇 제작</li>
+          <li>Codex로 간단한 자동화 스크립트·게임형 콘텐츠 제작 가능</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>📜 자격증 수요자 (취득 목적 명확)</h4>
+        <ul>
+          <li>"AI-POT 자격증 응시 준비를 수업 안에서 완성"</li>
+          <li>이론 + 기출 풀이 완비 — 별도 학습 시간 부담 최소화</li>
+          <li>자격증만 따는 게 아닌 실무 결과물 동반 보유</li>
+          <li>KPC 공인 자격증 = 컴활·MOS와 같은 발급기관 신뢰도</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 5</div>
+    <h1 class="part-title">상담 현장 FAQ — 자주 받는 질문 & 응대법</h1>
+
+    <div class="faq-item">
+      <div class="faq-q">Q1. "가격이 60만에서 40만으로 내려간 이유는 뭔가요? 수업 줄어든 거 아닌가요?"</div>
+      <div class="faq-a">
+        <p>수업이 줄어든 게 아니라, 오히려 더 강화됐어요. 가격 인하는 "AI 활용 능력은 이제 누구나 필요하다"는 판단으로 진입장벽을 낮춘 것입니다.</p>
+        <p>수업 시간(8일)은 동일하고, 실습 비중 강화 + 생산성 도구 추가 + AI-POT 자격증 대비 추가로 가치는 오히려 상승했습니다.</p>
+        <p>기존 1단계 수강생 대비 신규 수강생이 "실용성·실무 활용·자격증" 세 가지를 모두 얻을 수 있는 구조입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q2. "AI-POT 자격증이 뭐예요? 신뢰성 있나요?"</div>
+      <div class="faq-a">
+        <p>사단법인 한국생산성본부(KPC)가 주관하는 공인 자격증입니다. KPC는 컴활·MOS·ITQ 등을 운영하는 기관이라 발급기관 신뢰도는 컴활과 동일 수준이에요.</p>
+        <p>이력서 자격증 란에 정식으로 "AI-POT (한국생산성본부)" 기재 가능합니다.</p>
+        <p>현재 "AI 활용 가능자"를 객관적으로 증명할 수 있는 거의 유일한 공인 자격이라서, 향후 채용 시장에서 가치가 더 올라갈 가능성이 큽니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q3. "AI 한번도 안 써본 사람도 가능한가요?"</div>
+      <div class="faq-a">
+        <p>Chat GPT를 "한번이라도 써본 적 있다" 정도면 충분합니다.</p>
+        <p>1일차에 퍼스널 설정부터 시작하기 때문에 입문자도 따라올 수 있도록 설계되어 있어요.</p>
+        <p>다만 컴퓨터·스마트폰 기본 활용이 가능하셔야 합니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q4. "기존 1단계랑 정확히 뭐가 달라요?"</div>
+      <div class="faq-a">
+        <p>가장 큰 차이는 4가지입니다:</p>
+        <p>① 가격: 60만 → 40만 (33% 인하)</p>
+        <p>② 학습 방식: 이론 중심 → 실습 중심 (첫날부터 결과물)</p>
+        <p>③ 결과물: 동화책·이미지 등 콘텐츠 → 업무 자동화·코딩·자격증 등 실용형</p>
+        <p>④ 자격증: 이론만 학습 → AI-POT 응시 준비 완료까지</p>
+        <p>기존이 "AI를 배우는 수업"이었다면, 리뉴얼은 "AI로 실무를 바꾸는 수업"입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q5. "코딩 한번도 안 해봤는데 5일차 Codex 코딩이 가능해요?"</div>
+      <div class="faq-a">
+        <p>네, 가능합니다. 직접 코드를 짜는 게 아니라 "AI에게 코딩을 시키는 방법"을 배우는 거예요.</p>
+        <p>Codex가 코드를 작성하고, 학생은 결과를 확인하면서 수정 요청만 하면 됩니다.</p>
+        <p>비개발자가 본인만의 게임·자동화 스크립트를 만들 수 있다는 게 이 수업의 차별점이에요.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q6. "자격증 합격률은 어떻게 되나요?"</div>
+      <div class="faq-a">
+        <p>수업 안에서 이론 정리 + 기출문제 풀이까지 다루기 때문에 응시 준비는 완성됩니다.</p>
+        <p>다만 합격은 본인 복습량에 따라 달라지므로 "무조건 합격" 보장은 하지 않습니다.</p>
+        <p>수업 후 본인 학습을 병행하면 충분히 합격 가능한 수준으로 가르칩니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q7. "AI 디자인·영상 과정도 있다던데 어떤 걸 먼저 들어야 해요?"</div>
+      <div class="faq-a">
+        <p>목적이 다릅니다. 진로·관심사에 따라 권해드려요.</p>
+        <p>▸ 사무 자동화·생산성·자격증이 우선 → AI 프롬프트 엔지니어링 (본 과정)</p>
+        <p>▸ 디자인 결과물(로고·패키지·포스터) → AI 디자인 스타터 클래스</p>
+        <p>▸ 광고 영상·마케팅 콘텐츠 → AI 마케팅 영상 제작 과정</p>
+        <p>본 과정을 먼저 들으면 AI 기본기가 잡혀서 디자인·영상 과정에서 결과물 퀄리티가 훨씬 올라갑니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 6</div>
+    <h1 class="part-title">경쟁 상황 & 우려사항 응대</h1>
+
+    <h2 class="sub-title" id="p1-6-1">6-1. "유튜브·블로그에 무료로 다 있던데요?"</h2>
+    <p>→ <strong>공인 자격증 + 통합 워크플로우 + 케어를 강조하세요.</strong></p>
+    <ul class="bullets">
+      <li><strong>무료 콘텐츠는 단편적 — 도구 1개씩 따로 설명. 본 과정은 8일에 걸쳐 자료조사 → PPT → GPTs → 자동화 → 자격증을 통합 워크플로우로 학습</strong></li>
+      <li><strong>공인 자격증(AI-POT)은 무료 강의로 대체 불가 — 이력서에 적을 수 있는 객관적 증명은 자격증뿐</strong></li>
+      <li><strong>막혔을 때 강사가 옆에서 봐주는 "실시간 케어"는 무료 콘텐츠 한계 — 실제 결과물 완성도 차이로 직결</strong></li>
+    </ul>
+
+    <h2 class="sub-title" id="p1-6-2">6-2. "다른 학원도 AI 자격증 과정 있던데요?"</h2>
+    <p>→ <strong>본 과정의 4가지 차별점을 짚어주세요.</strong></p>
+    <ol class="numbered">
+      <li><strong>이론 강의가 아닌 실습 중심 (1~6일차) + 자격증 대비 (7~8일차)</strong> (대부분의 자격증 과정은 "이론·기출풀이"만 다룸)</li>
+      <li><strong>결과물 = NotebookLM·PPT·GPTs·코딩게임·자동화 워크플로우 5종 이상</strong> (자격증 합격 + 본인 결과물 동시 보유)</li>
+      <li><strong>Codex 코딩 자동화 — 비개발자도 코드 결과물 보유</strong> (다른 자격증 과정에서는 거의 다루지 않음)</li>
+      <li><strong>AI 디자인 / 영상 과정과 통합 학습 로드맵</strong> (단발성 자격증 과정이 아닌 SBS아카데미 정규 과정 연계)</li>
+    </ol>
+
+    <h2 class="sub-title" id="p1-6-3">6-3. "AI-POT 자격증이 별로 알려지지 않은 거 아닌가요?"</h2>
+    <ul class="bullets">
+      <li><strong>지금이 "먼저 따 두는 시점" — 채용 시장에서 본격 요구하기 시작하면 응시자 폭증 예상</strong></li>
+      <li>발급기관(KPC)은 컴활·MOS·ITQ 운영기관 — 발급기관 신뢰도는 검증됨</li>
+      <li>AI 활용 능력을 객관적으로 증명할 수 있는 거의 유일한 공인 자격</li>
+      <li>"신생 자격증"이 "인지도 낮음"이 아니라 "선점 가치 있음"임을 강조</li>
+    </ul>
+
+    <h2 class="sub-title" id="p1-6-4">6-4. "수강료 40만원도 부담돼요"</h2>
+    <p>학생 상황에 맞춰 응대하세요.</p>
+    <ul class="bullets">
+      <li><strong>취준생 대상</strong> → "이력서에 적을 수 있는 자격증 1개가 40만원이면 합리적이에요. 면접 한 번 통과로 회수됩니다."</li>
+      <li><strong>직장인 대상</strong> → "본인 업무 시간을 자동화로 줄이는 효과가 큽니다. 사내 AI 활용 역량으로 인사평가에도 반영 가능해요."</li>
+      <li><strong>창업자 대상</strong> → "외주 의뢰비 1건 분량 — 본인이 GPTs·자동화 시스템 갖추면 회수 빠릅니다."</li>
+      <li><strong>할부·국가 지원·패키지 할인 등 결제 옵션 안내</strong></li>
+    </ul>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 7</div>
+    <h1 class="part-title">정규 과정 연결 전략 (Upsell Path)</h1>
+
+    <h2 class="sub-title" id="p1-7-1">7-1. 학생 신호 캐치 → 추천 과정 매핑</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th class="col-old">학생이 보이는 신호</th>
+          <th class="col-new">추천 연계 과정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>"이미지·디자인 결과물도 만들고 싶어요"</td><td class="new-cell">AI 디자인 스타터 클래스</td></tr>
+        <tr><td>"광고·홍보 영상 제작해보고 싶어요"</td><td class="new-cell">AI 마케팅 영상 제작 과정</td></tr>
+        <tr><td>"포토샵·일러스트도 깊게 배우고 싶어요"</td><td class="new-cell">포토샵·일러스트 정규 과정</td></tr>
+        <tr><td>"엑셀·VBA 자동화도 더 배우고 싶어요"</td><td class="new-cell">엑셀·데이터 분석 정규 과정</td></tr>
+        <tr><td>"공인 AI 자격증 더 따고 싶어요"</td><td class="new-cell">후속 AI 자격증 과정 / 심화 과정</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="p1-7-2">7-2. 3대 AI 과정 통합 학습 로드맵</h2>
+    <div class="callout callout-ink">
+      <div class="callout-label">📦 SBS아카데미 강남점 AI 과정 통합 권유</div>
+      <p>▸ AI 프롬프트 엔지니어링 (본 과정) — 기반 AI 활용 능력 + 자격증</p>
+      <p>▸ AI 디자인 스타터 클래스 — 정적 비주얼 결과물 (로고·패키지·포스터)</p>
+      <p>▸ AI 마케팅 영상 제작 과정 — 동적 콘텐츠 결과물 (광고 영상)</p>
+      <p>→ 세 과정 동반 시 "자격증 + 디자인 포트폴리오 + 영상 포트폴리오" 완성</p>
+      <p>→ 마케팅·기획·창업·콘텐츠 진로의 최강 패키지</p>
+    </div>
+
+    <h2 class="sub-title" id="p1-7-3">7-3. 수료 후 follow-up 전략</h2>
+    <ol class="numbered">
+      <li><strong>수료 직후: AI-POT 응시 일정 안내 + 추가 학습 자료 제공</strong></li>
+      <li><strong>자격증 합격 후 SNS·블로그 후기 요청 (학생 동의 시) → 다음 기수 모객</strong></li>
+      <li><strong>수료 1~2개월 후 follow-up: "업무에서 어떻게 활용하고 계세요?" + 디자인·영상 과정 추천</strong></li>
+      <li><strong>기존 수강생 한정 다음 정규 과정 할인 패키지 안내</strong></li>
+    </ol>
+
+    <h2 class="sub-title" id="p1-7-4">7-4. LTV (Lifetime Value) 시나리오</h2>
+    <div class="callout callout-accent">
+      <div class="callout-label">📈 본 과정의 LTV 기여 흐름</div>
+      <p>1. AI 프롬프트 엔지니어링 (40만원) → 자격증 + 실습 결과물 확보</p>
+      <p>2. AI 디자인 스타터 또는 AI 마케팅 영상 추가 (40~60% 전환 목표)</p>
+      <p>3. 포토샵·일러스트 또는 영상 편집 정규 과정 (30~40% 추가 전환)</p>
+      <p>4. 데이터 분석·UI/UX·실무 심화 과정 (10~20% 심화 전환)</p>
+      <p>→ 결과: 본 과정 1회 → 평균 2~3개 추가 과정 LTV 가능 + 자격증 후기 통한 추가 모객</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 8</div>
+    <h1 class="part-title">상담 클로징 멘트 & 금기어</h1>
+
+    <h2 class="sub-title" id="p1-8-1">8-1. 관심도별 클로징 멘트</h2>
+
+    <h3 class="minor-title">📞 Soft Close — 관심도 낮음 / 비교 중인 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">관심 환기 멘트</div>
+      <p>"AI 자격증은 이제부터 본격 시작이라, 지금 따 두시는 게 가장 가치 있어요.</p>
+      <p>40만원으로 자격증 + 실습 결과물 + 업무 자동화 능력까지 얻으시는 거고,</p>
+      <p>8일이면 끝나니까 부담도 적어요. 노션 자료 페이지 한번 보내드릴게요."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Medium Close — 결정 직전 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">결정 도와주는 멘트</div>
+      <p>"고민되시는 부분이 ① 가격 ② 시간 ③ 자격증 활용도 중 어떤 거세요?</p>
+      <p>(고객 답변 후) → 가격: 60만 → 40만으로 이미 진입장벽 낮췄어요.</p>
+      <p>시간: 8일 단기라 휴가·주말로 가능. 자격증: KPC 공인이라 컴활과 동일 수준 신뢰도예요.</p>
+      <p>리뉴얼 정원이 빨리 차는 편이라 우선 자리 잡아두시는 걸 권해드려요."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Hard Close — 구매 직전 고객</h3>
+    <div class="callout callout-accent">
+      <div class="callout-label">결제 유도 멘트</div>
+      <p>"리뉴얼 첫 기수는 보통 입소문 타기 전이라 자리 여유 있지만, 자격증 알려지면 다음 기수부터 빠르게 마감돼요.</p>
+      <p>오늘 결제하시면 [얼리버드 / 패키지 할인 / 정규 과정 연계 혜택] 적용 가능합니다.</p>
+      <p>일정 변경은 사전 협의로 조정 가능해요."</p>
+    </div>
+
+    <h2 class="sub-title" id="p1-8-2">8-2. 절대 하지 말아야 할 멘트 (금기어)</h2>
+    <table class="taboo">
+      <thead>
+        <tr>
+          <th class="col-bad">❌ 금기 멘트</th>
+          <th class="col-good">✅ 대체 멘트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bad-cell">"가격 내렸으니 부담 없죠?" (가치 깎임)</td><td class="good-cell">"진입장벽을 낮춘 거고, 자격증·실습·자동화로 가치는 오히려 강화됐어요"</td></tr>
+        <tr><td class="bad-cell">"이거 들으면 자격증 무조건 합격해요"</td><td class="good-cell">"응시 준비는 수업 안에서 완성되고, 합격은 본인 복습량에 따라 달라져요. 충분히 합격 가능한 수준으로 가르칩니다"</td></tr>
+        <tr><td class="bad-cell">"AI-POT 모르면 못 들어가요"</td><td class="good-cell">"AI-POT는 KPC(컴활·MOS 운영기관) 주관 공인 자격이고, 지금이 선점 시점이에요"</td></tr>
+        <tr><td class="bad-cell">"AI 처음 써도 쉬워요"</td><td class="good-cell">"입문자도 가능하지만, 실습 밀도는 높은 편이에요. 학습 의지 있는 분께 추천드려요"</td></tr>
+        <tr><td class="bad-cell">"디자인·영상 과정 안 들어도 돼요"</td><td class="good-cell">"본 과정으로 AI 기반을 잡으시면 디자인·영상 과정 결과물 퀄리티가 훨씬 올라가요"</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="p1-8-3">8-3. 상담 마무리 체크리스트</h2>
+    <ul class="checklist">
+      <li>☐ 학생의 목적 파악했나 (자격증 / 업무 자동화 / 취업 / 창업 / 부업)</li>
+      <li>☐ 가격 60만 → 40만 인하 + 가치 강화 메시지 전달했나</li>
+      <li>☐ AI-POT 자격증 발급기관(KPC) 신뢰도 설명했나</li>
+      <li>☐ 매일 결과물 7종 자료 보여줬거나 안내했나</li>
+      <li>☐ AI 디자인·영상 과정과의 연계 가능성 안내했나</li>
+      <li>☐ 결제 → 일정 변경 가능 정책 안내했나</li>
+    </ul>
+  </div>
+
+  <div class="end-mark">— End of Prompt Engineering Lv.1 Guide —</div>
+</section>
+
+<section id="tab-prompt2" class="tab-content">
+
+  <div class="cover">
+    <div class="cover-eyebrow">2026 리뉴얼 정규과정 영업 상담 가이드</div>
+    <h1 class="cover-title">AI 프롬프트 엔지니어링 2단계</h1>
+    <p class="cover-subtitle">(리뉴얼 — 미드저니·나노바나나 비주얼 콘텐츠 제작)</p>
+    <p class="cover-en">Prompt Engineering Lv.2 (Renewed) · Visual Content Full-stack</p>
+  </div>
+
+  <div class="callout callout-ink">
+    <div class="callout-label">⚡ 한 줄 포지셔닝</div>
+    <p>"수강료 <strong>60만 → 40만</strong>으로 낮추고, <strong>콘텐츠 제작 풀스택</strong>으로 노선을 명확히 한 리뉴얼 과정."</p>
+    <p>1일차 캐릭터 → 인스타툰 → 영화 포스터 → 미드저니 → 영상·음악까지 풀 사이클.</p>
+    <p>AI 프롬프트 1단계가 <strong>'업무·자격증'</strong> 트랙이라면, 2단계는 <strong>'비주얼·콘텐츠'</strong> 트랙.</p>
+  </div>
+
+  <h2 class="sub-title" id="p2-overview">📌 과정 한눈에 보기</h2>
+  <table class="overview">
+    <tbody>
+      <tr><th>과정명</th><td>AI 프롬프트 엔지니어링 2단계 (리뉴얼)</td></tr>
+      <tr><th>수강료</th><td><strong style="color: var(--accent);">40만원</strong> (구 60만원 → 33% 인하)</td></tr>
+      <tr><th>수업 시수</th><td>8일 과정</td></tr>
+      <tr><th>수업 방식</th><td>콘텐츠 제작 실습 중심 — 1일차부터 결과물 누적</td></tr>
+      <tr><th>수강 대상</th><td>AI로 비주얼 콘텐츠를 만들고 싶은 누구나 (비전공자 가능)</td></tr>
+      <tr><th>선수 지식</th><td>AI 프롬프트 1단계 수강 권장 (필수는 아님)</td></tr>
+      <tr><th>사용 도구</th><td>Chat GPT, Midjourney, Nano Banana, Gemini, Flow, Suno, Canva, Photoroom</td></tr>
+      <tr><th>최종 결과물</th><td>캐릭터 카드 · 인스타툰 · 영화 포스터 · 스토리보드 · 카드 디자인 · 영상 클립 · 음악</td></tr>
+    </tbody>
+  </table>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 1</div>
+    <h1 class="part-title">왜 지금 이 리뉴얼 과정인가</h1>
+
+    <h2 class="sub-title" id="p2-1-1">1-1. 비주얼 콘텐츠 제작 시장의 현재 (2026)</h2>
+    <ul class="bullets">
+      <li>Midjourney·DALL-E·Nano Banana 등 <strong>이미지 생성 AI가 상업적 사용 수준</strong>에 도달 — 광고·웹툰·포스터 외주 시장에 영향</li>
+      <li>Flow · Suno 등 <strong>영상·음악 생성 AI</strong> 도구 폭증 → 1인 크리에이터가 풀스택 콘텐츠 제작 가능</li>
+      <li>외주 비용 절감 니즈 폭증: 캐릭터 10~50만 / 포스터 30~80만 / 인스타툰 5~15만/회 → <strong style="color: var(--accent);">본인이 직접 만드는 사람이 압도적 경쟁력</strong></li>
+      <li>인스타·유튜브·웹툰 플랫폼에서 <strong>"AI로 만든 일관성 있는 캐릭터/콘텐츠"</strong> 인기 급상승 — 차별화 무기 확보 시점</li>
+    </ul>
+
+    <h2 class="sub-title" id="p2-1-2">1-2. 리뉴얼의 3대 핵심 변화</h2>
+    <div class="callout callout-ink">
+      <div class="callout-label">🔄 What's New</div>
+      <p>1. 💰 <strong>가격: 60만원 → 40만원</strong> (33% 인하, 진입장벽 대폭 완화)</p>
+      <p>2. 🎨 <strong>노선 분화: "ChatGPT 업무 + 미드저니 혼합" → "콘텐츠 제작 풀스택"으로 집중</strong></p>
+      <p>3. 🎵 <strong>멀티모달 확장: 이미지에서 영상·음성·음악까지 (Flow·Suno 추가)</strong></p>
+    </div>
+
+    <h2 class="sub-title" id="p2-1-3">1-3. "1단계 vs 2단계" 듀얼 트랙 구조</h2>
+    <p>리뉴얼된 SBS아카데미 AI 프롬프트 엔지니어링은 <strong>1단계(업무·자격증)와 2단계(콘텐츠·비주얼)로 명확히 노선이 분화</strong>됐습니다. 학생 목적에 따라 둘 중 하나, 또는 듀얼로 권할 수 있는 구조입니다.</p>
+    <div class="callout callout-accent">
+      <div class="callout-label">🛤 듀얼 트랙 비교</div>
+      <p>▸ <strong>1단계 (업무·자격증 트랙)</strong> — 사무 자동화 + AI-POT 자격증<br>
+      → "AI를 업무에 쓰고 싶다" / "이력서에 자격증 한 줄 더하고 싶다"</p>
+      <p>▸ <strong>2단계 (콘텐츠·비주얼 트랙)</strong> — 캐릭터·만화·포스터·영상·음악 풀스택<br>
+      → "AI로 비주얼 콘텐츠를 만들고 싶다" / "창작·1인 크리에이터·디자인 분야로 가고 싶다"</p>
+      <p>→ 두 트랙은 독립적으로도, 듀얼로도 권장 가능 (수강 순서 자유)</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 2</div>
+    <h1 class="part-title">기존 과정 vs 리뉴얼 과정 — 정확히 무엇이 달라졌는가</h1>
+
+    <h2 class="sub-title" id="p2-2-1">2-1. 한눈에 보는 비교</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th class="col-old">기존 2단계 (혼합형)</th>
+          <th class="col-new">리뉴얼 2단계 (콘텐츠 풀스택)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>수강료</th><td>60만원</td><td class="new-cell">40만원 (33% ↓)</td></tr>
+        <tr><th>수업 정체성</th><td>ChatGPT 업무활용 + 미드저니</td><td class="new-cell">비주얼 콘텐츠 제작 풀스택</td></tr>
+        <tr><th>초반 1~3일</th><td>코딩·엑셀·파일관리·네컷만화 (업무 중심)</td><td class="new-cell">캐릭터·인스타툰·영화 포스터·스토리보드 (콘텐츠 중심)</td></tr>
+        <tr><th>마지막 일차</th><td>미드저니로 영상 만들기</td><td class="new-cell">멀티모달 (이미지·영상·음성·음악) Flow·Suno 추가</td></tr>
+        <tr><th>1단계와의 관계</th><td>내용 일부 중복 (코딩·엑셀 등)</td><td class="new-cell">명확한 노선 분화 — 듀얼 트랙으로 권장 가능</td></tr>
+        <tr><th>결과물 다양성</th><td>미드저니 이미지·영상 위주</td><td class="new-cell">7종 결과물 (캐릭터·만화·포스터·스토리보드·카드·영상·음악)</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="p2-2-2">2-2. 일자별 커리큘럼 비교</h2>
+    <table class="day-compare">
+      <thead>
+        <tr>
+          <th>일차</th>
+          <th class="col-old">기존 2단계</th>
+          <th class="col-new">리뉴얼 2단계</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="day-num">1</td><td>OT + 프롬프트 기본 + 저작권</td><td class="new-cell">OT + 캐릭터 프로필 카드 제작</td></tr>
+        <tr><td class="day-num">2</td><td>ChatGPT 캔버스·파일 생성 (워드/TXT)</td><td class="new-cell">짧은 만화 (캐릭터·에피소드) — 인스타툰</td></tr>
+        <tr><td class="day-num">3</td><td>사무 자동화 (코딩·엑셀·파일 일괄관리)</td><td class="new-cell">애니 포스터 + 스토리보드 제작</td></tr>
+        <tr><td class="day-num">4</td><td>Midjourney 1 — 인터페이스·웹미드저니</td><td class="new-cell">Midjourney 1 — 인터페이스·설정 (동일)</td></tr>
+        <tr><td class="day-num">5</td><td>Midjourney 2 — 프롬프트·퍼스널라이즈·무드보드</td><td class="new-cell">Midjourney 2 — 무드보드·파라미터·옴니레퍼런스</td></tr>
+        <tr><td class="day-num">6</td><td>Midjourney 3 + Nano Banana — 파라미터·업스케일·Pen·Edit</td><td class="new-cell">Midjourney 3 — 영상 만들기 + 나노바나나</td></tr>
+        <tr><td class="day-num">7</td><td>Midjourney 4 + Nano Banana — 카드 디자인</td><td class="new-cell">Midjourney 4 — 카드 디자인 (Chat GPT·나노바나나 협업)</td></tr>
+        <tr><td class="day-num">8</td><td>Midjourney 5 — 미드저니 영상</td><td class="new-cell">멀티모달 — 이미지·영상·음성·음악 (Flow·Suno)</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-accent">
+      <div class="callout-label">💡 영업 시 강조 멘트</div>
+      <p>"기존 2단계는 "ChatGPT 업무"랑 "미드저니"를 섞은 구조였어요.</p>
+      <p>리뉴얼은 1~3일차를 콘텐츠 제작(캐릭터·만화·포스터·스토리보드)로 바꿔서 "비주얼 콘텐츠 풀스택 수업"으로 명확히 했습니다.</p>
+      <p>그래서 1단계랑 내용이 안 겹치고, 둘 다 들으시면 업무·콘텐츠 양쪽 다 잡으실 수 있어요."</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 3</div>
+    <h1 class="part-title">핵심 세일즈 포인트 5가지</h1>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP1. "60만원 → 40만원, 가격은 낮추고 노선은 더 선명해졌습니다"</div>
+      <p>기존 60만원에서 <strong>33% 인하된 40만원</strong>으로 진입장벽을 낮췄습니다. 또한 "ChatGPT 업무 + 미드저니" 혼합형에서 <strong style="color: var(--accent);">콘텐츠 제작 풀스택으로 노선 집중</strong> — 비주얼 콘텐츠를 만들고 싶은 학생에게 가장 적합한 과정으로 정체성이 명확해졌습니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP2. "8일 = 7종 결과물, 매일 새로운 결과물이 손에 남습니다"</div>
+      <p>일자별로 학생이 얻는 결과물:</p>
+      <table class="result-list" style="margin-top: 12px;">
+        <tbody>
+          <tr><td class="day-num">1일</td><td>Chat GPT로 만든 본인 캐릭터 프로필 카드</td></tr>
+          <tr><td class="day-num">2일</td><td>캐릭터·에피소드 기반 인스타툰 (짧은 만화)</td></tr>
+          <tr><td class="day-num">3일</td><td>AI로 만든 애니 영화 포스터 + 스토리보드</td></tr>
+          <tr><td class="day-num">4일</td><td>Midjourney 기본 이미지 (인터페이스 마스터)</td></tr>
+          <tr><td class="day-num">5일</td><td>무드보드·옴니레퍼런스 활용한 일관성 있는 이미지 세트</td></tr>
+          <tr><td class="day-num">6일</td><td>Midjourney 영상 클립 + 나노바나나 캐릭터 일관성</td></tr>
+          <tr><td class="day-num">7일</td><td>Midjourney + GPT + Nano Banana 활용 카드 디자인</td></tr>
+          <tr><td class="day-num">8일</td><td>Flow·Suno로 만든 영상 + AI 음악 (멀티모달 완성)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP3. "Midjourney + Nano Banana 깊이 있게 — 캐릭터 일관성이 핵심"</div>
+      <p>Midjourney의 <strong>옴니레퍼런스·스타일레퍼런스·무드보드·파라미터</strong>까지 심화 학습. 동시에 <strong style="color: var(--accent);">Nano Banana(Gemini 이미지 모델)로 캐릭터 일관성 유지</strong> 기법까지 학습합니다. 인스타툰·웹툰·캐릭터 IP 운영에 핵심적인 기술 — 단순 이미지 생성 강의와 차원이 다른 깊이입니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP4. "이미지·영상·음성·음악 — 멀티모달 풀스택"</div>
+      <p>마지막 8일차에 <strong>Flow(영상)·Suno(음악)</strong>까지 다루어 <strong style="color: var(--accent);">비주얼+오디오 모든 채널을 AI로 완성</strong> 가능. "AI로 음악도 만들 수 있다"는 경험은 1인 크리에이터·인플루언서·콘텐츠 제작자에게 강력한 무기입니다.</p>
+    </div>
+
+    <div class="sp-card">
+      <div class="sp-title"><span class="sp-emoji">🎯</span>SP5. "비전공자·디자인 입문자도 가능, 정규 과정 진입 전 완벽 입문"</div>
+      <ul class="bullets">
+        <li><strong>디자인·영상 전공 무관 — Chat GPT 써본 적 있으면 OK</strong></li>
+        <li>8일 단기 집중 → 직장인·학생 모두 부담 적음</li>
+        <li>결과물 7종 = 본인 작품집·SNS 콘텐츠 즉시 활용 가능</li>
+        <li>포토샵·일러스트·영상편집 정규 과정 진입 전 "AI 기반 잡기"로 최적</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 4</div>
+    <h1 class="part-title">타겟 고객별 어필 메시지</h1>
+
+    <div class="target-grid">
+      <div class="target-card">
+        <h4>🎨 1인 크리에이터 / 인플루언서 / 웹툰 작가 지망</h4>
+        <ul>
+          <li>"캐릭터 일관성 유지(나노바나나) + 인스타툰 + 영상·음악까지 풀스택"</li>
+          <li>SNS·유튜브·웹툰 플랫폼에 즉시 활용 가능한 결과물</li>
+          <li>외주비 절감 — 본인 캐릭터·콘텐츠 직접 제작</li>
+          <li>8일 단기 집중 — 본업 병행 가능</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🏪 1인 창업자 / 소상공인</h4>
+        <ul>
+          <li>"카드 디자인·포스터·홍보 영상·BGM까지 본인이 직접"</li>
+          <li>광고 대행사 안 거치고 빠른 콘텐츠 제작</li>
+          <li>트렌드 즉시 반영 — 신메뉴·신상품 즉시 비주얼화</li>
+          <li>수강료 회수 — 외주 의뢰비 1건 분량</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>🎓 대학생 / 취준생 (디자인·콘텐츠 직군 지망)</h4>
+        <ul>
+          <li>"포트폴리오에 들어갈 결과물 7종 확보"</li>
+          <li>마케팅·홍보·기획·디자인 직군 면접 어필 자료</li>
+          <li>비전공자도 도전 가능 — 진로 탐색에 최적</li>
+          <li>AI 디자인·영상 정규 과정 진입 전 입문에 적합</li>
+        </ul>
+      </div>
+      <div class="target-card">
+        <h4>📚 AI 프롬프트 1단계 수강 완료자</h4>
+        <ul>
+          <li>"1단계 업무·자격증 → 2단계 콘텐츠·비주얼"로 자연스러운 연결</li>
+          <li>Chat GPT 기본기 잡은 상태에서 시각·청각 콘텐츠로 확장</li>
+          <li>1단계와 내용 중복 없음 — 학습 효율 최상</li>
+          <li>듀얼 수강 시 "업무 + 콘텐츠" 양쪽 능력 확보</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 5</div>
+    <h1 class="part-title">상담 현장 FAQ — 자주 받는 질문 & 응대법</h1>
+
+    <div class="faq-item">
+      <div class="faq-q">Q1. "1단계 안 들었는데 2단계 들어도 되나요?"</div>
+      <div class="faq-a">
+        <p>네, 가능합니다. 2단계는 "콘텐츠 제작 풀스택"으로 노선이 명확해서 1단계 없이도 진입 가능합니다.</p>
+        <p>다만 Chat GPT를 한번도 안 써본 분이라면 1단계부터 권해드리고, Chat GPT 기본 사용 경험이 있는 분은 2단계 바로 들어오셔도 됩니다.</p>
+        <p>1단계·2단계는 내용이 겹치지 않게 분화되어 있어, 듀얼 수강이 가장 효과적입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q2. "1단계랑 2단계 뭐가 달라요? 어느 걸 먼저 들어야 해요?"</div>
+      <div class="faq-a">
+        <p>노선이 다릅니다. 학생 목적에 따라 선택하세요.</p>
+        <p>▸ 1단계 (업무·자격증 트랙): 사무 자동화·NotebookLM·코딩·GPTs·AI-POT 자격증</p>
+        <p>▸ 2단계 (콘텐츠·비주얼 트랙): 캐릭터·인스타툰·포스터·미드저니·영상·음악</p>
+        <p>▸ 업무·자격증 우선 → 1단계 / 콘텐츠 제작 우선 → 2단계</p>
+        <p>둘 다 들으시면 "AI 업무 + AI 콘텐츠" 양쪽 능력 모두 확보 가능합니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q3. "Midjourney 유료인데 부담돼요"</div>
+      <div class="faq-a">
+        <p>Midjourney 기본 플랜은 월 10달러대로 부담이 크지 않은 편입니다.</p>
+        <p>수업 기간 1~2개월만 결제하시고, 결과물을 충분히 만든 뒤 해지 가능합니다.</p>
+        <p>단, 상업적 사용을 원하시면 유료 플랜이 필요하다는 점은 안내해 드려요.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q4. "나노바나나가 뭔가요?"</div>
+      <div class="faq-a">
+        <p>구글의 Gemini가 탑재한 이미지 생성·편집 모델의 별칭이에요. 정식 명칭은 "Gemini Image"이고 "나노바나나"가 코드네임으로 알려져 있습니다.</p>
+        <p>캐릭터 일관성 유지·디테일 편집에 강해서, 미드저니로 만든 캐릭터를 나노바나나로 다양한 포즈·배경에 적용하는 워크플로우가 가능합니다.</p>
+        <p>인스타툰·웹툰처럼 같은 캐릭터를 여러 장면에서 보여주는 콘텐츠에 핵심 도구입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q5. "왜 자격증이 없어요? 1단계는 있던데"</div>
+      <div class="faq-a">
+        <p>2단계는 "비주얼 콘텐츠 제작" 노선이라 자격증보다는 결과물 중심으로 설계됐어요.</p>
+        <p>콘텐츠 직군은 자격증보다 "포트폴리오 결과물"이 면접에서 더 강력하기 때문에, 8일에 7종 결과물을 확보하는 게 더 가치 있다고 판단했습니다.</p>
+        <p>자격증이 필요하시면 1단계(AI-POT)를 권해드리고, 콘텐츠 제작이 목적이면 2단계가 정답입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q6. "미드저니 사용법은 유튜브에도 많던데요?"</div>
+      <div class="faq-a">
+        <p>맞아요. 다만 유튜브 콘텐츠는 단편적입니다 — 한 가지 기능씩 다루고, 캐릭터 일관성·옴니레퍼런스·나노바나나 협업 같은 심화 워크플로우는 거의 없어요.</p>
+        <p>본 과정은 8일에 걸쳐 "캐릭터 → 만화 → 포스터 → 미드저니 → 영상 → 음악"의 통합 콘텐츠 제작 흐름으로 학습합니다.</p>
+        <p>강사가 옆에서 봐주는 실시간 케어도 영상 콘텐츠 한계 — 결과물 완성도가 다릅니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q7. "AI 디자인 스타터·마케팅 영상 과정도 있다던데 차이가 뭐예요?"</div>
+      <div class="faq-a">
+        <p>노선이 다릅니다.</p>
+        <p>▸ AI 프롬프트 엔지니어링 2단계 (본 과정): AI 콘텐츠 제작 풀스택 입문 — 캐릭터·만화·포스터·영상·음악</p>
+        <p>▸ AI 디자인 스타터: 브랜드 비주얼 디자인 중심 — 로고·패키지·포스터·디지털 배너</p>
+        <p>▸ AI 마케팅 영상 제작: 광고 영상 중심 — 브랜드 캠페인 영상 1편</p>
+        <p>본 과정은 "AI 도구로 콘텐츠를 만드는 입문"이고, 디자인·영상 과정은 "특정 목적(브랜드·광고)에 맞춘 결과물 제작"입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 6</div>
+    <h1 class="part-title">경쟁 상황 & 우려사항 응대</h1>
+
+    <h2 class="sub-title" id="p2-6-1">6-1. "유튜브에 미드저니 강의 무료로 많던데요?"</h2>
+    <p>→ <strong>통합 워크플로우 + 케어 + 결과물 깊이를 강조하세요.</strong></p>
+    <ul class="bullets">
+      <li><strong>유튜브는 도구 1개씩 단편적 학습. 본 과정은 8일에 걸쳐 캐릭터 → 만화 → 포스터 → 영상 → 음악까지 통합 워크플로우</strong></li>
+      <li><strong>캐릭터 일관성 유지(옴니레퍼런스·나노바나나) 같은 심화 기법은 유튜브 콘텐츠로 익히기 어려움</strong></li>
+      <li><strong>강사 실시간 케어 — 막혔을 때 답을 바로 받음, 결과물 완성도 직결</strong></li>
+    </ul>
+
+    <h2 class="sub-title" id="p2-6-2">6-2. "다른 학원도 AI 콘텐츠·미드저니 과정 있던데요?"</h2>
+    <p>→ <strong>본 과정의 4가지 차별점을 짚어주세요.</strong></p>
+    <ol class="numbered">
+      <li><strong>캐릭터 일관성 워크플로우 (Midjourney + 나노바나나) 심화</strong> (대부분의 학원은 "미드저니 사용법"만 다루고 캐릭터 일관성까지 안 다룸)</li>
+      <li><strong>이미지에서 영상·음악(Flow·Suno)까지 멀티모달 전 영역</strong> (보통 이미지 또는 영상 한 쪽만 다룸)</li>
+      <li><strong>콘텐츠 제작 풀 사이클 — 캐릭터부터 음악까지 일관된 흐름</strong> (단편적 기능 강의가 아닌 "콘텐츠를 어떻게 만드는가"의 워크플로우)</li>
+      <li><strong>1단계(업무) + 2단계(콘텐츠) 듀얼 트랙 + 디자인·영상 정규 과정 로드맵</strong> (단발성 강의가 아닌 SBS아카데미 정규 과정 연계)</li>
+    </ol>
+
+    <h2 class="sub-title" id="p2-6-3">6-3. "AI로 만든 콘텐츠 저작권 문제는 없나요?"</h2>
+    <ul class="bullets">
+      <li><strong>Midjourney 유료 플랜은 상업적 사용 공식 허용</strong></li>
+      <li>Chat GPT 생성물도 OpenAI 약관상 상업적 사용 가능</li>
+      <li>Suno·Flow·나노바나나도 각자 라이선스 안내 (수업 중 정책 안내)</li>
+      <li>상업적 안전 워크플로우 그대로 가르치니 결과물 사용에 문제 없음</li>
+    </ul>
+
+    <h2 class="sub-title" id="p2-6-4">6-4. "수강료 40만원도 부담돼요"</h2>
+    <p>학생 상황에 맞춰 응대하세요.</p>
+    <ul class="bullets">
+      <li><strong>취준생 대상</strong> → "결과물 7종이 포트폴리오로 남아요. 면접 한 번 통과로 회수됩니다."</li>
+      <li><strong>크리에이터 대상</strong> → "외주 비용 1~2건 분량이에요. 본인이 직접 만들면 회수 빠릅니다."</li>
+      <li><strong>1단계 수강생 대상</strong> → "1단계와 듀얼 수강 시 패키지 할인 가능합니다. (지점별 정책 확인)"</li>
+      <li><strong>할부·국가 지원·패키지 할인 등 결제 옵션 안내</strong></li>
+    </ul>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 7</div>
+    <h1 class="part-title">정규 과정 연결 전략 (Upsell Path)</h1>
+
+    <h2 class="sub-title" id="p2-7-1">7-1. 학생 신호 캐치 → 추천 과정 매핑</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th class="col-old">학생이 보이는 신호</th>
+          <th class="col-new">추천 연계 과정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>"AI 자격증·업무 자동화도 배우고 싶어요"</td><td class="new-cell">AI 프롬프트 엔지니어링 1단계 (듀얼 트랙)</td></tr>
+        <tr><td>"브랜드 로고·패키지·포스터 만들고 싶어요"</td><td class="new-cell">AI 디자인 스타터 클래스</td></tr>
+        <tr><td>"광고 영상·마케팅 콘텐츠 만들고 싶어요"</td><td class="new-cell">AI 마케팅 영상 제작 과정</td></tr>
+        <tr><td>"포토샵·일러스트 깊게 배우고 싶어요"</td><td class="new-cell">포토샵·일러스트 정규 과정</td></tr>
+        <tr><td>"영상 편집·모션그래픽 깊게 배우고 싶어요"</td><td class="new-cell">프리미어·애프터이펙트 정규 과정</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="p2-7-2">7-2. SBS아카데미 AI 과정 통합 학습 로드맵</h2>
+    <div class="callout callout-ink">
+      <div class="callout-label">📦 4대 AI 과정 통합 권유 (상황별)</div>
+      <p>▸ <strong>AI 프롬프트 1단계</strong> — AI 기반 + 업무 자동화 + 자격증</p>
+      <p>▸ <strong>AI 프롬프트 2단계</strong> (본 과정) — AI 콘텐츠 제작 풀스택</p>
+      <p>▸ <strong>AI 디자인 스타터</strong> — 브랜드 비주얼 (정적 결과물)</p>
+      <p>▸ <strong>AI 마케팅 영상</strong> — 광고 영상 (동적 결과물)</p>
+      <p>→ <strong>진로별 최적 패키지:</strong></p>
+      <p>• 마케팅·기획 진로 → 1단계 + 2단계 + 마케팅 영상</p>
+      <p>• 1인 창업·크리에이터 → 2단계 + 디자인 스타터 (+ 영상)</p>
+      <p>• 디자인·콘텐츠 직군 → 2단계 + 디자인 스타터 + 영상</p>
+      <p>• 사무·자격증 우선 → 1단계 (+ 2단계 콘텐츠 보강)</p>
+    </div>
+
+    <h2 class="sub-title" id="p2-7-3">7-3. 듀얼 트랙(1+2단계) 패키지 권유 시나리오</h2>
+    <p>AI 프롬프트 1·2단계는 노선이 다르므로 듀얼 수강이 매우 효과적입니다. 다음 케이스에 적극 권유:</p>
+    <ul class="bullets">
+      <li><strong>취준생 — 자격증(1단계) + 포트폴리오(2단계)로 이력서 완성도 최대화</strong></li>
+      <li><strong>1인 창업자 — 업무 자동화(1단계) + 콘텐츠 제작(2단계)로 사업 운영 전 영역 자급</strong></li>
+      <li><strong>직장인 — 사내 AI 역량(1단계) + 부캐/사이드 프로젝트(2단계)</strong></li>
+      <li><strong>방학·휴가 1회로 두 과정 모두 수강 가능 — 16일 집중 코스</strong></li>
+    </ul>
+
+    <h2 class="sub-title" id="p2-7-4">7-4. 수료 후 follow-up 전략</h2>
+    <ol class="numbered">
+      <li><strong>수료 직후: 결과물 SNS·블로그 노출 (학생 동의 시) → 다음 기수 모객</strong></li>
+      <li><strong>수료 1~2주: 다음 단계 권유 (디자인 스타터 / 영상 제작 / 1단계)</strong></li>
+      <li><strong>수료 1개월 후: "콘텐츠 어떻게 활용하고 계세요?" + 심화 과정 권유</strong></li>
+      <li><strong>수강생 한정 정규 과정 할인 패키지 안내</strong></li>
+    </ol>
+
+    <h2 class="sub-title" id="p2-7-5">7-5. LTV (Lifetime Value) 시나리오</h2>
+    <div class="callout callout-accent">
+      <div class="callout-label">📈 본 과정의 LTV 기여 흐름</div>
+      <p>1. AI 프롬프트 2단계 (40만원) → 콘텐츠 제작 결과물 7종 확보</p>
+      <p>2. AI 프롬프트 1단계 (40~50% 전환) — 듀얼 트랙 완성</p>
+      <p>3. AI 디자인 스타터 또는 AI 마케팅 영상 (30~40% 추가 전환)</p>
+      <p>4. 포토샵·일러스트·영상편집 정규 과정 (20~30% 추가 전환)</p>
+      <p>5. 1인 창업 / 실무 심화 과정 (10~15% 심화 전환)</p>
+      <p>→ 결과: 본 과정 1회 → 평균 2~3개 추가 과정 LTV + 결과물 후기 통한 추가 모객</p>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-eyebrow">Part 8</div>
+    <h1 class="part-title">상담 클로징 멘트 & 금기어</h1>
+
+    <h2 class="sub-title" id="p2-8-1">8-1. 관심도별 클로징 멘트</h2>
+
+    <h3 class="minor-title">📞 Soft Close — 관심도 낮음 / 비교 중인 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">관심 환기 멘트</div>
+      <p>"AI로 콘텐츠 만들어 보는 거 한번 경험해보시는 것만으로도 가치 있을 거예요.</p>
+      <p>8일에 캐릭터·만화·포스터·영상·음악까지 7종 결과물이 손에 남고,</p>
+      <p>40만원으로 부담도 적어요. 결과물 샘플 한번 보내드릴게요."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Medium Close — 결정 직전 고객</h3>
+    <div class="callout callout-ink">
+      <div class="callout-label">결정 도와주는 멘트</div>
+      <p>"어떤 결과물이 가장 끌리세요? 캐릭터·인스타툰·포스터·영상·음악 중에서요?</p>
+      <p>(고객 답변 후) → 그 결과물이 [N]일차에 정확히 나옵니다.</p>
+      <p>1단계도 관심 있으시면 듀얼 수강 패키지 가능하고, 2단계만 들으셔도 충분합니다."</p>
+    </div>
+
+    <h3 class="minor-title">📞 Hard Close — 구매 직전 고객</h3>
+    <div class="callout callout-accent">
+      <div class="callout-label">결제 유도 멘트</div>
+      <p>"리뉴얼 첫 기수는 자리 여유 있지만, 콘텐츠 제작 수요가 늘고 있어서 다음 기수부터 빠르게 마감될 가능성 있어요.</p>
+      <p>오늘 결제하시면 [얼리버드 / 1+2단계 듀얼 패키지 / 디자인·영상 과정 연계 혜택] 적용 가능합니다.</p>
+      <p>일정 변경은 사전 협의로 조정 가능해요."</p>
+    </div>
+
+    <h2 class="sub-title" id="p2-8-2">8-2. 절대 하지 말아야 할 멘트 (금기어)</h2>
+    <table class="taboo">
+      <thead>
+        <tr>
+          <th class="col-bad">❌ 금기 멘트</th>
+          <th class="col-good">✅ 대체 멘트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bad-cell">"가격 내렸으니 부담 없죠?" (가치 깎임)</td><td class="good-cell">"진입장벽을 낮춘 거고, 노선이 명확해져서 콘텐츠 제작에 집중도가 올라갔어요"</td></tr>
+        <tr><td class="bad-cell">"이거 들으면 웹툰 작가 될 수 있어요"</td><td class="good-cell">"AI 콘텐츠 제작 풀스택 입문이에요. 더 깊은 작업은 정규 디자인·영상 과정으로 연결됩니다"</td></tr>
+        <tr><td class="bad-cell">"1단계는 안 들으셔도 돼요"</td><td class="good-cell">"1단계는 다른 노선이라 듀얼 수강 시 시너지 큽니다. 우선순위 정하시면 안내해 드려요"</td></tr>
+        <tr><td class="bad-cell">"미드저니가 다 만들어줘요"</td><td class="good-cell">"미드저니가 도구고, 결과물 차이는 프롬프트 설계·캐릭터 일관성 워크플로우에서 갈립니다"</td></tr>
+        <tr><td class="bad-cell">"디자인·영상 과정 안 들어도 돼요"</td><td class="good-cell">"본 과정으로 AI 기반을 잡으시고 더 깊게 배우고 싶으시면 정규 디자인·영상 과정으로 이어집니다"</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-title" id="p2-8-3">8-3. 상담 마무리 체크리스트</h2>
+    <ul class="checklist">
+      <li>☐ 학생의 목적 파악했나 (크리에이터 / 창업 / 취업 / 부업 / 학습)</li>
+      <li>☐ 가격 60만 → 40만 인하 + 노선 명확화 메시지 전달했나</li>
+      <li>☐ 1단계와의 차이(업무·자격증 vs 콘텐츠·비주얼) 설명했나</li>
+      <li>☐ 7종 결과물 (캐릭터·만화·포스터·스토리보드·카드·영상·음악) 안내했나</li>
+      <li>☐ 듀얼 트랙(1+2단계) 패키지 가능성 언급했나</li>
+      <li>☐ AI 디자인·영상 정규 과정과의 연계 가능성 안내했나</li>
+      <li>☐ 결제 → 일정 변경 가능 정책 안내했나</li>
+    </ul>
+  </div>
+
+  <div class="end-mark">— End of Prompt Engineering Lv.2 Guide —</div>
+</section>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  const ACCENTS = {
+    design:   { main: '#D63384', soft: 'rgba(214, 51, 132, 0.08)' },
+    video:    { main: '#E67E22', soft: 'rgba(230, 126, 34, 0.08)' },
+    prompt1:  { main: '#2980B9', soft: 'rgba(41, 128, 185, 0.08)' },
+    prompt2:  { main: '#8E44AD', soft: 'rgba(142, 68, 173, 0.08)' },
+    compare:  { main: '#6C757D', soft: 'rgba(108, 117, 125, 0.08)' }
+  };
+
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-content');
+  const root = document.documentElement;
+  const tocList = document.getElementById('toc-list');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.querySelector('.sidebar-backdrop');
+  const menuToggle = document.querySelector('.menu-toggle');
+
+  function setAccent(name) {
+    const a = ACCENTS[name];
+    if (!a) return;
+    root.style.setProperty('--accent', a.main);
+    root.style.setProperty('--accent-soft', a.soft);
+  }
+
+  function buildTOC(panel) {
+    tocList.innerHTML = '';
+    if (!panel) return;
+    const sections = panel.querySelectorAll('h1.part-title, h2.sub-title');
+    if (sections.length === 0) {
+      tocList.innerHTML = '<li class="sidebar-empty">이 페이지는 목차가 없습니다.</li>';
+      return;
+    }
+    sections.forEach((s) => {
+      // ensure id
+      if (!s.id) {
+        s.id = 'h-' + Math.random().toString(36).slice(2, 9);
+      }
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + s.id;
+      a.textContent = s.textContent.trim();
+      if (s.tagName === 'H2') {
+        a.style.paddingLeft = '24px';
+        a.style.fontSize = '12.5px';
+      }
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById(s.id);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // mobile: close sidebar after navigation
+          if (window.innerWidth <= 960) {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('open');
+          }
+        }
+      });
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    activateFirstTOCEntry();
+  }
+
+  function activateFirstTOCEntry() {
+    const all = tocList.querySelectorAll('a');
+    all.forEach(a => a.classList.remove('active'));
+    if (all[0]) all[0].classList.add('active');
+  }
+
+  function switchTab(tabName) {
+    tabs.forEach((t) => t.classList.toggle('active', t.dataset.tab === tabName));
+    panels.forEach((p) => p.classList.toggle('active', p.id === 'tab-' + tabName));
+    const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    if (btn) setAccent(btn.dataset.accent);
+    const panel = document.getElementById('tab-' + tabName);
+    buildTOC(panel);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  tabs.forEach((t) => {
+    t.addEventListener('click', () => switchTab(t.dataset.tab));
+  });
+
+  // TOC active state via scroll
+  function onScroll() {
+    const activePanel = document.querySelector('.tab-content.active');
+    if (!activePanel) return;
+    const sections = activePanel.querySelectorAll('h1.part-title, h2.sub-title');
+    let current = null;
+    const offset = 200;
+    sections.forEach((s) => {
+      const r = s.getBoundingClientRect();
+      if (r.top <= offset) current = s;
+    });
+    const links = tocList.querySelectorAll('a');
+    links.forEach((a) => a.classList.remove('active'));
+    if (current) {
+      const link = tocList.querySelector(`a[href="#${current.id}"]`);
+      if (link) link.classList.add('active');
+    } else if (links[0]) {
+      links[0].classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // mobile sidebar
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+  });
+  backdrop.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+  });
+
+  // init
+  const initialTab = 'compare';
+  switchTab(initialTab);
+})();
+</script>
+</body>
+</html>
